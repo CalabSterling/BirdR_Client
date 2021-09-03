@@ -11,7 +11,7 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2",
     "bootstrap": "^5.1.0",
-    "reacstrap": "^8.9.0"
+    "reactstrap": "^8.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
