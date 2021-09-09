@@ -1,26 +1,44 @@
-import React, { useState } from 'react';
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import React, {useState} from 'react';
+import { Input, Form, Button } from 'reactstrap';
+import styled from "styled-components";
+
+
+const Container = styled.div`
+    margin: 0;
+    padding: 0;
+`;
 
 const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        fetch('http://localhost:3000/user/login', {
+            method: 'POST',
+            body: JSON.stringify({user:{username: username, password: password}}),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).then(
+            (response) => response.json()
+        ).then((data) => {
+            props.updateToken(data.sessionToken);
+        })
+    }
+    
     return ( 
-        <div>
-            <h1>Login</h1>
-            <Form>
-                <FormGroup>
-                    <Label htmlFor="username">Username</Label>
-                    <Input name="username" value={username}/>
-                </FormGroup>
-                <FormGroup>
-                    <Label htmlFor="password">Password</Label>
-                    <Input name="password" value={password}/>
-                </FormGroup>
-                <Button type="submit">Login</Button>
+        <Container>
+            <Form onSubmit={handleSubmit}>
+                    <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username} placeholder="Username" type="email"/>
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="Password" type="password"/>
+                    <Button type="submit">Login</Button>
+                    <br />
+                    <p>Don't have an account? </p><a href="#" onClick={props.switchToSignup}>Signup</a>
+                            
             </Form>
-        </div>
-     );
+        </Container>
+     )
 }
  
 export default Login;
