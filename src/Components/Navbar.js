@@ -1,10 +1,9 @@
 import React from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, NavLink, Button } from 'reactstrap';
 
 const Navbar = (props) => {
   return (
     <div>
-      <p>Random Nav Bar Placeholder</p>
       <Nav>
         <NavItem>
           <NavLink href="#">Link</NavLink>
@@ -13,10 +12,7 @@ const Navbar = (props) => {
           <NavLink href="#">Link</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#">Another Link</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink disabled href="#">Disabled Link</NavLink>
+          <Button onClick={props.clickLogout}>Logout</Button>
         </NavItem>
       </Nav>
     </div>
