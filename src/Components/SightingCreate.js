@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const SightingCreate = (props) => {
     const [bird, setBird] = useState('');
@@ -9,6 +9,10 @@ const SightingCreate = (props) => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [rarity, setRarity] = useState('');
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => setModal(!modal);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,7 +41,11 @@ const SightingCreate = (props) => {
 
     return(
         <div>
-            <p>Add A Bird</p>
+            {/* <Button onClick={() =>}>Add A Bird!</Button> */}
+            <Button color="danger" onClick={toggle}>Add a Bird</Button>
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Add A Bird!</ModalHeader>
+                <ModalBody>
             <Form onSubmit={handleSubmit}>
             {/* <Form> */}
                 <FormGroup>
@@ -78,6 +86,11 @@ const SightingCreate = (props) => {
                 </FormGroup>
                 <Button type="submit">Click to Submit</Button>
             </Form>
+            </ModalBody>
+            <ModalFooter>
+                <Button onClick={toggle}>Close</Button>
+            </ModalFooter>
+            </Modal>
         </div>
     );
 };
