@@ -42,15 +42,13 @@ const SightingIndex = (props) => {
 
     return(
         <div>
-            Sighting Index
-        
         <Container>
             <Row>
                 <Col md="3">
                      <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
                  </Col>
                  <Col md="9">
-                     <h2>Log a bird</h2>
+                     <h2>Bird Cards will go here</h2>
                      {/* <SightingTable sightings={sightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} fetchSightings={fetchSightings} token={props.token} /> */}
                 </Col>
                  {/* {updateActive ? <SightingEdit sightingToUpdate={sightingToUpdate} updateOff={updateOff} token={props.token} fetchSightings={fetchSightings} /> : <></>} */}

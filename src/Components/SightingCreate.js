@@ -41,13 +41,11 @@ const SightingCreate = (props) => {
 
     return(
         <div>
-            {/* <Button onClick={() =>}>Add A Bird!</Button> */}
-            <Button color="danger" onClick={toggle}>Add a Bird</Button>
+            <Button color="success" onClick={toggle}>Add a Bird</Button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Add A Bird!</ModalHeader>
                 <ModalBody>
             <Form onSubmit={handleSubmit}>
-            {/* <Form> */}
                 <FormGroup>
                     <Label htmlFor="bird"/>
                     <Input name="bird" value={bird} placeholder="Bird" onChange={(e) => setBird(e.target.value)} />
