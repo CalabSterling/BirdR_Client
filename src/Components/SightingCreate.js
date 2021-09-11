@@ -10,6 +10,7 @@ const SightingCreate = (props) => {
     const [image, setImage] = useState('');
     const [rarity, setRarity] = useState('');
     const [modal, setModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const toggle = () => setModal(!modal);
 
@@ -34,10 +35,28 @@ const SightingCreate = (props) => {
             setImage('');
             setRarity('')
             props.fetchSightings();
-        })
-    }
+        });
+    };
 
+    const UploadImage = async (e) => {
+        const files = e.target.files;
+        const data = new FormData();
+        data.append("file", files[0]);
+        data.append("upload_preset", "banana");
+        setLoading(true);
+        const res = await fetch (
+            "https://api.cloudinary.com/v1_1/dcddchckg/image/upload",
+            {
+                method: "POST",
+                body: data,
+            }
+        )
+        const File = await res.json();
 
+        console.log(File.secure_url);
+        setImage(File.secure_url)
+        setLoading(false)
+    };
 
     return(
         <div>
@@ -69,9 +88,9 @@ const SightingCreate = (props) => {
                     <Input name="description" value={description} placeholder="Description" onChange={(e) => setDescription(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="image"/>
-                    <Input name="image" value={image} onChange={(e) => setImage(e.target.value)} > 
-                    </Input>
+                    <Input type="file" name="file" placeholder="Upload image here" onChange={UploadImage} /> 
+                    <br />
+                    {loading ? (<h3>Loading...</h3>) : <img src={image} style={{width: "300px"}} />}
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="rarity"/>
@@ -82,7 +101,7 @@ const SightingCreate = (props) => {
                         <option value="3">3</option>
                     </Input>
                 </FormGroup>
-                <Button type="submit">Click to Submit</Button>
+                <Button type="submit" onClick={toggle}>Click to Submit</Button>
             </Form>
             </ModalBody>
             <ModalFooter>
