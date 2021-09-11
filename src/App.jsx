@@ -2,6 +2,7 @@ import './App.css';
 import React, {useState, useEffect} from 'react';
 import Sitebar from './Components/Navbar';
 import Auth from './auth/Auth';
+import SightingIndex from './Components/SightingIndex';
 import styled from 'styled-components';
 
 const UserContainer = styled.div`
@@ -33,10 +34,15 @@ function App(props) {
     setSessionToken('');
   }
 
+  const protectedViews = () => {
+    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken}/> : <Auth updateToken={updateToken}/>)
+  };
+
   return (
     <div>
       <UserContainer>
-        <Auth updateToken={updateToken}/>
+        {/* <Auth updateToken={updateToken}/> */}
+        {protectedViews()}
       </UserContainer>
       {sessionToken === '' ? null : <Sitebar clickLogout={clearToken}/>}
     </div>
