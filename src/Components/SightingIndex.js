@@ -10,7 +10,7 @@ const SightingIndex = (props) => {
     const [sightingToUpdate, setSightingToUpdate] = useState({});
 
     const fetchSightings = () => {
-        fetch('http://localhost:3000/sighting' {
+        fetch('http://localhost:3000/sighting',{
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',
