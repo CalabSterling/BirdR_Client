@@ -75,9 +75,9 @@ const Auth = (props) => {
     const switchToLogin = () => {
         setActive('login')
     }
-
+    
     let hour = new Date().getHours()
-
+    var today = new Date();
 
     return ( 
         <Container>
