@@ -12,7 +12,7 @@ import {
 
 const SightingCards = (props) => {
   const deleteSighting = (sighting) => {
-    fetch(`http:localhost:3000/sighting/:${sighting.id}`, {
+    fetch(`http://localhost:3000/sighting/${sighting.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -29,10 +29,10 @@ const SightingCards = (props) => {
         <CardImg
           top
           width="100%"
-          src="/assets/318x180.svg"
-          alt="Card image cap"
+          src={sighting.image}
+          alt="There should be a bird here"
         />
-        <CardBody>
+        <CardBody key={index}>
           <CardTitle tag="h5">{sighting.bird}</CardTitle>
           <CardSubtitle tag="h6" className="mb-2 text-muted">
             {sighting.time}
