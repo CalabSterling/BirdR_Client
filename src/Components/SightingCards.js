@@ -55,6 +55,10 @@ const totalLikes =
             Delete
           </Button>
           <Button onClick={() => setLikeCount(likeCount + 1)}>Like</Button>
+          
+          <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button>
+
+          <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button>
         </CardBody>
       </Card>
     )

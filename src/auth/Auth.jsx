@@ -3,6 +3,13 @@ import Signup from './Signup';
 import Login from './Login';
 import styled from 'styled-components';
 
+const LogoContainer = styled.div`
+    font-size: 20px;
+    font-family: 'Garamond';
+    color: rgb(255, 251, 30);
+    align-items: center;
+    justify-content: center;
+`;
 const Container = styled.div`
     width: 280px;
     min-height: 550px;
@@ -10,7 +17,7 @@ const Container = styled.div`
     flex-direction: column;
     border-radius: 20px;
     background-color: #fff;
-    box-shadow: 0 0 2px rgba(15, 15, 15, .028);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, .15);
     position: relative;
     overflow: hidden;
 `;
@@ -64,6 +71,7 @@ const InnerContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 20px;
 `;
 
 const Auth = (props) => {
@@ -85,6 +93,7 @@ const Auth = (props) => {
                 <BackDrop />
                 <HeaderContainer>
                     <HeaderText>
+                        <LogoContainer>BirdR</LogoContainer>
                         {hour >= 4 && hour < 12 ? "Good Morning" : hour >= 12 && hour < 18 ? "Good Afternoon" : "Good Evening"}
                     </HeaderText> 
                     <SmallText>
