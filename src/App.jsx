@@ -5,6 +5,10 @@ import Auth from './auth/Auth';
 import SightingIndex from './Components/SightingIndex';
 import styled from 'styled-components';
 
+const SiteContainer = styled.div`
+  display: flex;
+`;
+
 const UserContainer = styled.div`
   width: 100%;
   height: 100%; 
@@ -39,13 +43,12 @@ function App(props) {
   };
 
   return (
-    <div>
+    <SiteContainer>
+      {sessionToken === '' ? null : <Sitebar clickLogout={clearToken}/>}
       <UserContainer>
-        {/* <Auth updateToken={updateToken}/> */}
         {protectedViews()}
       </UserContainer>
-      {sessionToken === '' ? null : <Sitebar clickLogout={clearToken}/>}
-    </div>
+    </SiteContainer>
   );
 }
 

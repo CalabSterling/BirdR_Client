@@ -11,6 +11,7 @@ import {
 
 
 const SightingCards = (props) => {
+  
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
       method: "DELETE",
@@ -44,14 +45,10 @@ const SightingCards = (props) => {
             {sighting.location}
           </CardSubtitle>
           <CardText>{sighting.description}</CardText>
-          <Button
-            color="danger"
-            onClick={() => {
-              deleteSighting(sighting);
-            }}
-          >
-            Delete
-          </Button>
+          
+          <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button>
+
+          <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button>
         </CardBody>
       </Card>
       )

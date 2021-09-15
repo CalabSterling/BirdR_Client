@@ -68,3 +68,55 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+*sterling Code*
+import './App.css';
+import React, {useState, useEffect} from 'react';
+import Sitebar from './Components/Navbar';
+import Auth from './auth/Auth';
+import styled from 'styled-components';
+import Birthday from './Components/Birthday';
+
+const SiteContainer = styled.div`
+`;
+const UserContainer = styled.div`
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+function App(props) {
+  const [sessionToken, setSessionToken] = useState('');
+
+  useEffect(() => {
+    if (localStorage.getItem('token')){
+      setSessionToken(localStorage.getItem('token'));
+    }
+  }, [])
+
+  const updateToken = (newToken) => {
+    localStorage.setItem('token', newToken);
+    setSessionToken(newToken);
+    console.log(sessionToken);
+  }
+
+  const clearToken = () => {
+    localStorage.clear();
+    setSessionToken('');
+  }
+
+  return (
+      <SiteContainer>
+        <UserContainer>
+          {sessionToken === '' ? <Auth updateToken={updateToken} /> : null}
+        </UserContainer>
+        {sessionToken === '' ? null : <Sitebar clickLogout={clearToken}/>}
+      </SiteContainer>
+  );
+}
+
+export default App;
