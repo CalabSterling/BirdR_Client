@@ -1,11 +1,22 @@
 import React, {useState} from 'react';
-import { Input, Form, Button } from 'reactstrap';
+import { Input, Form, Label } from 'reactstrap';
 import styled from "styled-components";
+import Birthday from '../Components/Birthday';
 
 
 const Container = styled.div`
     margin: 0;
     padding: 0;
+    font-size: 14px;
+`;
+
+const ButtonContainer = styled.button`
+    width: 100%;
+    color: #fff;
+    font-size: 22px;
+    border: none;
+    background-color: rgb(8,150,48);
+    border-radius: 4px;
 `;
 
 const Login = (props) => {
@@ -24,18 +35,30 @@ const Login = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.sessionToken);
+            let birthday = data.user.birthday;
+            let firstName = data.user.firstName;
+            console.log(firstName);
+            return(birthday, firstName);
         })
     }
-    
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+    console.log(date)
+
     return ( 
         <Container>
             <Form onSubmit={handleSubmit}>
+                    <Label htmlFor="email">Email</Label>
                     <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username} placeholder="Username" type="email"/>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="Password" type="password"/>
-                    <Button type="submit">Login</Button>
                     <br />
-                    <p>Don't have an account? </p><a href="#" onClick={props.switchToSignup}>Signup</a>
-                            
+                    <Label htmlFor="password">Password</Label>
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="Password" type="password"/>
+                    <br />
+                    <ButtonContainer type="submit">Login</ButtonContainer>
+                    <br />
+                    <p>Don't have an account? <a href="#" onClick={props.switchToSignup}>Signup</a></p>
+                    <Birthday />
             </Form>
         </Container>
      )
