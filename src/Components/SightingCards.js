@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Card,
   CardImg,
@@ -7,10 +7,14 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
-} from "reactstrap";
-
+} from "reactstrap"; 
 
 const SightingCards = (props) => {
+const [likeCount, setLikeCount] = useState(0);
+const totalLikes = 
+  likeCount > 0
+      ?    `${likeCount} likes` : `Like`;
+
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
       method: "DELETE",
@@ -20,18 +24,15 @@ const SightingCards = (props) => {
       }),
     }).then(() => props.fetchSightings());
   };
-
   
   const sightingMapper = () => {
-    return props.sightings.map((sighting, index) => {
-      return (
-        <Card>
+    return props.sightings.map((sighting, index) => (
+      <Card>
         <CardImg
           top
           width="100%"
           src={sighting.image}
-          alt="There should be a bird here"
-        />
+          alt="There should be a bird here" />
         <CardBody key={index}>
           <CardTitle tag="h5">{sighting.bird}</CardTitle>
           <CardSubtitle tag="h6" className="mb-2 text-muted">
@@ -44,20 +45,22 @@ const SightingCards = (props) => {
             {sighting.location}
           </CardSubtitle>
           <CardText>{sighting.description}</CardText>
+          <CardText>{totalLikes}</CardText>
           <Button
             color="danger"
             onClick={() => {
               deleteSighting(sighting);
-            }}
+            } }
           >
             Delete
           </Button>
+          <Button onClick={() => setLikeCount(likeCount + 1)}>Like</Button>
         </CardBody>
       </Card>
-      )
-    }
     )
-}
+    )
+};
+
 return (
   <div>
       <Card striped>
@@ -68,5 +71,4 @@ return (
     </div>
 )
 }
-
 export default SightingCards;
