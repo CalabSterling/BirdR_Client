@@ -94,12 +94,13 @@ const SightingCreate = (props) => {
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="rarity"/>
-                    <Input type="select" name="rarity" placeholder="Rarity" value={rarity} onChange={(e) => setRarity(e.target.value)} >
-                        <option value="" disabled selected>Rarity</option>
+                    <Input type="select" name="rarity" placeholder="Rarity (Required)" value={rarity} onChange={(e) => setRarity(e.target.value)} >
+                        <option value="" disabled selected>Rarity (Required)</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </Input>
+                    
                 </FormGroup>
                 <Button type="submit" onClick={toggle}>Click to Submit</Button>
             </Form>

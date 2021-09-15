@@ -16,6 +16,7 @@ const UserContainer = styled.div`
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
+  
 
   useEffect(() => {
     if (localStorage.getItem('token')){
