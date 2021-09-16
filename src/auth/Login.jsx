@@ -22,6 +22,8 @@ const ButtonContainer = styled.button`
 const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [birthday, setBirthday] = useState('');
+    const [firstName, setFirstName] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -35,16 +37,15 @@ const Login = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.sessionToken);
-            let birthday = data.user.birthday;
-            let firstName = data.user.firstName;
-            console.log(firstName);
-            return(birthday, firstName);
+            setBirthday(data.user.birthday);
+            setFirstName(data.user.firstName);
         })
     }
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
     console.log(date)
+    console.log(birthday)
 
     return ( 
         <Container>
@@ -57,8 +58,8 @@ const Login = (props) => {
                     <br />
                     <ButtonContainer type="submit">Login</ButtonContainer>
                     <br />
-                    <p>Don't have an account? <a href="#" onClick={props.switchToSignup}>Signup</a></p>
-                    <Birthday />
+                    <p>Don't have an account? <a href="/signup" onClick={props.switchToSignup}>Signup</a></p>
+                    {birthday === date ? <Birthday firstName={firstName}/> : null}
             </Form>
         </Container>
      )
