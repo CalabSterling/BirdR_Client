@@ -42,10 +42,10 @@ const SightingCreate = (props) => {
         const files = e.target.files;
         const data = new FormData();
         data.append("file", files[0]);
-        data.append("upload_preset", "malamar");
+        data.append("upload_preset", "banana");
         setLoading(true);
         const res = await fetch (
-            `https://api.cloudinary.com/v1_1/dmvbiwqqd/image/upload`,
+            `https://api.cloudinary.com/v1_1/dcddchckg/image/upload`,
             {
                 method: "POST",
                 body: data,
@@ -100,7 +100,7 @@ const SightingCreate = (props) => {
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </Input>
-                    
+
                 </FormGroup>
                 <Button type="submit" onClick={toggle}>Click to Submit</Button>
             </Form>

@@ -3,12 +3,23 @@ import { Container, Row, Col } from 'reactstrap';
 import SightingCreate from './SightingCreate';
 import SightingCards from './SightingCards';
 import SightingEdit from './SightingEdit';
+import WeatherParent from './WeatherParent';
 
 
 const SightingIndex = (props) => {
     const [sightings, setSightings] = useState([]);
     const [updateActive, setUpdateActive] = useState(false);
-    const [sightingToUpdate, setSightingToUpdate] = useState({}); 
+    const [sightingToUpdate, setSightingToUpdate] = useState({});
+    const [position, setPosition] = useState({ lat: 0, lon: 0 });
+    
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(success => {
+          var lat = success.coords.latitude;
+          var lon = success.coords.longitude;
+          console.log(lon, lat)
+          setPosition({ lat: lat, lon: lon })
+        })
+      }, []);
 
     const fetchSightings = () => {
         fetch('http://localhost:3000/sighting', {
@@ -42,6 +53,7 @@ const SightingIndex = (props) => {
     }, [])
 
     return(
+        <div>
         <Container>
             <Row>
                 <Col md="3">
@@ -53,6 +65,11 @@ const SightingIndex = (props) => {
                 {updateActive ? <SightingEdit sightingToUpdate={sightingToUpdate} updateOff={updateOff} token={props.token} fetchSightings={fetchSightings} /> : <></>}
             </Row>
         </Container>
+        <div>
+           <WeatherParent position={position} /> 
+        </div>
+
+        </div>
     )
 }
 
