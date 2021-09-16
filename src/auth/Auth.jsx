@@ -76,7 +76,8 @@ const InnerContainer = styled.div`
 
 const Auth = (props) => {
     const [active, setActive] = useState("login");
-    const switchToSignup = () => {
+    const switchToSignup = (e) => {
+        e.preventDefault();
         setActive('signup');
     }
 
