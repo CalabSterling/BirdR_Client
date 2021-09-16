@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
+
 const SightingCreate = (props) => {
     const [bird, setBird] = useState('');
     const [location, setLocation] = useState('');
