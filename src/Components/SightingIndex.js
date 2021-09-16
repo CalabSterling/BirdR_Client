@@ -17,10 +17,10 @@ const SightingIndex = (props) => {
                 'Content-Type': 'application/json',
                 'Authorization': props.token
             })
-        }) .then( (res) => res.json())
+        }).then( (res) => res.json())
         .then((sightingData) => {
             setSightings(sightingData)
-            console.log(sightingData);
+           // console.log(sightingData);
         })
     }
 

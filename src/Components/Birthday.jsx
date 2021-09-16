@@ -4,7 +4,7 @@ import {
     ModalHeader,  
     ModalBody 
 } from 'reactstrap';
-import styled from "styled-components";
+//import styled from "styled-components";
 
 const Birthday = (props) => {
     return ( 
