@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
 
 const SightingCreate = (props) => {
     const [bird, setBird] = useState('');
@@ -24,7 +25,7 @@ const SightingCreate = (props) => {
                 'Content-Type': 'application/json',
                 'Authorization': props.token
             })
-        }) .then((res) => res.json())
+        }).then((res) => res.json())
         .then((logData) => {
             console.log(logData);
             setBird('');
@@ -90,7 +91,7 @@ const SightingCreate = (props) => {
                 <FormGroup>
                     <Input type="file" name="file" placeholder="Upload image here" onChange={UploadImage} /> 
                     <br />
-                    {loading ? (<h3>Loading...</h3>) : <img src={image} style={{width: "300px"}} />}
+                    {loading ? (<h3>Loading...</h3>) : <img src={image} style={{width: "300px"}} alt="pic is here"/>}
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="rarity"/>

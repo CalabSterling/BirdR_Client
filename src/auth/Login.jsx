@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { Input, Form, Label } from 'reactstrap';
 import styled from "styled-components";
-import Birthday from '../Components/Birthday';
-
+import Birthday from './Birthday';
 
 const Container = styled.div`
     margin: 0;
@@ -22,6 +21,8 @@ const ButtonContainer = styled.button`
 const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [birthday, setBirthday] = useState('');
+    const [firstName, setFirstName] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -35,16 +36,10 @@ const Login = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.sessionToken);
-            let birthday = data.user.birthday;
-            let firstName = data.user.firstName;
-            console.log(firstName);
-            return(birthday, firstName);
+            console.log(data.user.id)
+            localStorage.setItem('ID', data.user.id)
         })
     }
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
-    console.log(date)
 
     return ( 
         <Container>
@@ -57,8 +52,8 @@ const Login = (props) => {
                     <br />
                     <ButtonContainer type="submit">Login</ButtonContainer>
                     <br />
-                    <p>Don't have an account? <a href="#" onClick={props.switchToSignup}>Signup</a></p>
-                    <Birthday />
+                    <p>Don't have an account? <a href="/signup" onClick={props.switchToSignup}>Signup</a></p>
+
             </Form>
         </Container>
      )

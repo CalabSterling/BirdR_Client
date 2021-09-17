@@ -47,8 +47,10 @@ const [likeCount, setLikeCount] = useState(likeData);
   }
   
   const sightingMapper = () => {
-    return props.sightings.map((sighting, index) => (
-      <Card>
+    return props.sightings.map((sighting, index) => {
+      console.log(sighting.owner_id.toString());
+      return (
+        <Card>
         <CardImg
           top
           width="100%"
@@ -68,9 +70,9 @@ const [likeCount, setLikeCount] = useState(likeData);
           <CardText>{sighting.description}</CardText>   
           <Button onMouseOver={() => {hoverHum()}} onClick={() => {updateLikes()}}>Likes: {likeCount}</Button>
           
-          <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button>
+          { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
 
-          <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button>
+          { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
         </CardBody>
       </Card>
     )

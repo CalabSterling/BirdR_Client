@@ -76,7 +76,8 @@ const InnerContainer = styled.div`
 
 const Auth = (props) => {
     const [active, setActive] = useState("login");
-    const switchToSignup = () => {
+    const switchToSignup = (e) => {
+        e.preventDefault();
         setActive('signup');
     }
 
@@ -85,7 +86,6 @@ const Auth = (props) => {
     }
     
     let hour = new Date().getHours()
-    var today = new Date();
 
     return ( 
         <Container>

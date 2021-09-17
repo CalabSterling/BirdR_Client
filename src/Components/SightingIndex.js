@@ -17,10 +17,9 @@ const SightingIndex = (props) => {
                 'Content-Type': 'application/json',
                 'Authorization': props.token
             })
-        }) .then( (res) => res.json())
+        }).then( (res) => res.json())
         .then((sightingData) => {
             setSightings(sightingData)
-            console.log(sightingData);
         })
     }
 
@@ -43,6 +42,7 @@ const SightingIndex = (props) => {
 
     return(
         <Container>
+            {}
             <Row>
                 <Col md="3">
                      <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
