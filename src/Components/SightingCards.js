@@ -21,7 +21,6 @@ const SightingCards = (props) => {
       }),
     }).then(() => props.fetchSightings());
   };
-
   
   const sightingMapper = () => {
     return props.sightings.map((sighting, index) => {
