@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  cursor: url("https://downloads.totallyfreecursors.com/cursor_files/hummingbird.cur"), pointer;
 }
 
 .App-logo {
@@ -36,3 +37,6 @@
     transform: rotate(360deg);
   }
 }
+
+.App:hover {
+  cursor: url("https://downloads.totallyfreecursors.com/cursor_files/hummingbird.cur"), url("https://downloads.totallyfreecursors.com/thumbnails/hummingbird1.gif"), copy;}

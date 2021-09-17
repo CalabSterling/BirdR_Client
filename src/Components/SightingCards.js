@@ -10,10 +10,27 @@ import {
 } from "reactstrap"; 
 
 const SightingCards = (props) => {
-const [likeCount, setLikeCount] = useState(0);
-const totalLikes = 
-  likeCount > 0
-      ?    `${likeCount} likes` : `Like`;
+const [likeData, setLikeData] = useState()
+// const likeRecorder = (sighting) => {setLikeData(sighting.likes)};
+// likeRecorder();
+const [likeCount, setLikeCount] = useState(likeData);
+
+  const updateLikes = (sighting, likeCount) => {
+    // event.preventDefault();
+    setLikeCount(likeCount + 1);
+        fetch(`http://localhost:3000/sighting/updateLikes/${sighting.id}`, {
+            method: `PUT`,
+            body: JSON.stringify({
+                sighting: {
+                   likes: likeCount
+                }}),
+                headers: new Headers({
+                  'Content-Type': 'application/json'
+              })
+          }).then((res) => {
+              props.fetchSightings();
+          })
+    }
 
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
@@ -24,6 +41,10 @@ const totalLikes =
       }),
     }).then(() => props.fetchSightings());
   };
+
+  function hoverHum(e) {
+    Button.style.cursor = 'url("https://downloads.totallyfreecursors.com/cursor_files/hummingbird.cur"), url("https://downloads.totallyfreecursors.com/thumbnails/hummingbird1.gif"), auto;';
+  }
   
   const sightingMapper = () => {
     return props.sightings.map((sighting, index) => (
@@ -44,17 +65,8 @@ const totalLikes =
           <CardSubtitle tag="h6" className="mb-2 text-muted">
             {sighting.location}
           </CardSubtitle>
-          <CardText>{sighting.description}</CardText>
-          <CardText>{totalLikes}</CardText>
-          <Button
-            color="danger"
-            onClick={() => {
-              deleteSighting(sighting);
-            } }
-          >
-            Delete
-          </Button>
-          <Button onClick={() => setLikeCount(likeCount + 1)}>Like</Button>
+          <CardText>{sighting.description}</CardText>   
+          <Button onMouseOver={() => {hoverHum()}} onClick={() => {updateLikes()}}>Likes: {likeCount}</Button>
           
           <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button>
 
