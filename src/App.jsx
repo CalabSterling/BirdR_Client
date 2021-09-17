@@ -1,22 +1,40 @@
-import './App.css';
+// import './App.css';
 import React, {useState, useEffect} from 'react';
 import Sitebar from './Components/Navbar';
 import Auth from './auth/Auth';
 import SightingIndex from './Components/SightingIndex';
 import styled from 'styled-components';
+import background from './Assets/backgroundimage4.jpg'
+import WebFont from 'webfontloader'
+
+
+
+
+const BirdBackground = styled.div`
+background-image: url(${background});
+background-color: #719D80;
+background-size: cover;
+min-height: 100%;
+min-width: 1024px;
+width: 100%;
+height: 100%;
+position: absolute;
+top: 0;
+left: 0;
+`
 
 const SiteContainer = styled.div`
-  display: flex;
+  font-family: 'Amatic SC', cursive;
+  height: 100%;
+  display: grid;
 `;
 
+
 const UserContainer = styled.div`
-  width: 100%;
-  height: 100%; 
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-`;
+margin: auto;
+`
+
+
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
@@ -45,12 +63,14 @@ function App(props) {
   };
 
   return (
+    <BirdBackground>
     <SiteContainer>
-      {sessionToken === '' ? null : <Sitebar clickLogout={clearToken}/>}
+         {sessionToken === '' ? null : <Sitebar clickLogout={clearToken}/>}
       <UserContainer>
         {protectedViews()}
       </UserContainer>
     </SiteContainer>
+    </BirdBackground>
   );
 }
 
