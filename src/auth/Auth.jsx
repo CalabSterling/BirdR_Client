@@ -87,7 +87,6 @@ const Auth = (props) => {
 
     let hour = new Date().getHours()
 
-
     return ( 
         <Container>
             <TopContainer>
