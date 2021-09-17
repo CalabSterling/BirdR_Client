@@ -22,9 +22,13 @@ const SightingCards = (props) => {
     }).then(() => props.fetchSightings());
   };
 
+  // console.log(typeof props.sightings.map(owner => String(owner.owner_id))
+  // console.log(typeof props.sightings.owner_id)
+  // console.log(typeof localStorage.getItem('ID'))
   
   const sightingMapper = () => {
     return props.sightings.map((sighting, index) => {
+      console.log(sighting.owner_id.toString());
       return (
         <Card>
         <CardImg
@@ -46,9 +50,9 @@ const SightingCards = (props) => {
           </CardSubtitle>
           <CardText>{sighting.description}</CardText>
           
-          <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button>
+          { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
 
-          <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button>
+          { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
         </CardBody>
       </Card>
       )

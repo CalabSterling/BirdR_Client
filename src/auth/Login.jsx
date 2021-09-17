@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { Input, Form, Label } from 'reactstrap';
 import styled from "styled-components";
-import Birthday from '../Components/Birthday';
-
+import Birthday from './Birthday';
 
 const Container = styled.div`
     margin: 0;
@@ -37,15 +36,10 @@ const Login = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.sessionToken);
-            setBirthday(data.user.birthday);
-            setFirstName(data.user.firstName);
+            console.log(data.user.id)
+            localStorage.setItem('ID', data.user.id)
         })
     }
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
-    console.log(date)
-    console.log(birthday)
 
     return ( 
         <Container>
@@ -59,7 +53,7 @@ const Login = (props) => {
                     <ButtonContainer type="submit">Login</ButtonContainer>
                     <br />
                     <p>Don't have an account? <a href="/signup" onClick={props.switchToSignup}>Signup</a></p>
-                    {birthday === date ? <Birthday firstName={firstName}/> : null}
+
             </Form>
         </Container>
      )

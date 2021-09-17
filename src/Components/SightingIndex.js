@@ -20,7 +20,6 @@ const SightingIndex = (props) => {
         }).then( (res) => res.json())
         .then((sightingData) => {
             setSightings(sightingData)
-           // console.log(sightingData);
         })
     }
 
@@ -43,6 +42,7 @@ const SightingIndex = (props) => {
 
     return(
         <Container>
+            {}
             <Row>
                 <Col md="3">
                      <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
