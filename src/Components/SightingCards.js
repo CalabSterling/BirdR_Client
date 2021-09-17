@@ -21,10 +21,6 @@ const SightingCards = (props) => {
       }),
     }).then(() => props.fetchSightings());
   };
-
-  // console.log(typeof props.sightings.map(owner => String(owner.owner_id))
-  // console.log(typeof props.sightings.owner_id)
-  // console.log(typeof localStorage.getItem('ID'))
   
   const sightingMapper = () => {
     return props.sightings.map((sighting, index) => {
