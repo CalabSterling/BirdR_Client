@@ -1,9 +1,31 @@
 import React, {useState, useEffect } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Nav, NavItem, NavLink, Row, Col, CardDeck, CardColumns } from 'reactstrap';
 import SightingCreate from './SightingCreate';
 import SightingCards from './SightingCards';
 import SightingEdit from './SightingEdit';
 import WeatherParent from './WeatherParent';
+import styled from 'styled-components';
+// import newBackground from '../Assets/backgroundimage4.jpg';
+
+const NewBackground = styled.body`
+    background-color: lightblue;
+    height: 100%;
+    width: 100vw;
+    margin-top: 0px;
+    /* padding-top: 0%; */
+`;
+
+const IndexDiv = styled.div`
+    margin-top: 0%;
+    padding-top: 0%;
+
+`;
+
+const Sidebar = styled.div`
+    margin-top: 3%;
+    /* position: fixed; */
+    z-index: 99;
+`;
 
 
 const SightingIndex = (props) => {
@@ -53,23 +75,46 @@ const SightingIndex = (props) => {
     }, [])
 
     return(
-        <div>
+        <IndexDiv>
+        <NewBackground>
+            
         <Container>
-            <Row>
-                <Col md="3">
-                     <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
+        <Row>
+                <Col md="4">  
+            <Sidebar>
+            <Nav vertical>
+                <NavItem>
+                    <NavLink href="#">BirdR</NavLink>
+                </NavItem>
+                <NavItem>
+                    <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
+                </NavItem>
+                <NavItem>
+                    <WeatherParent position={position} />
+                </NavItem>
+                <NavItem>
+                    <NavLink href="#">BirdR</NavLink>
+                </NavItem>
+            </Nav>
+            </Sidebar>
+            {/* <Row>
+                <Col md="4"> */}
+                     {/* <SightingCreate fetchSightings={fetchSightings} token={props.token}/> */}
                  </Col>
-                 <Col md="9">
+                 <Col md="8">
+                     {/* <CardDeck> */}
                      <SightingCards sightings={sightings} fetchSightings={fetchSightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} token={props.token} />
+                     {/* </CardDeck> */}
                 </Col>
                 {updateActive ? <SightingEdit sightingToUpdate={sightingToUpdate} updateOff={updateOff} token={props.token} fetchSightings={fetchSightings} /> : <></>}
             </Row>
         </Container>
+        
         <div>
-           <WeatherParent position={position} /> 
+           {/* <WeatherParent position={position} />  */}
         </div>
-
-        </div>
+        </NewBackground>
+        </IndexDiv>
     )
 }
 

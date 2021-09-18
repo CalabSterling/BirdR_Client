@@ -7,6 +7,7 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
+  Col
 } from "reactstrap";
 
 
@@ -25,6 +26,8 @@ const SightingCards = (props) => {
   const sightingMapper = () => {
     return props.sightings.map((sighting, index) => {
       return (
+        // <div>
+          // <Col md="8">
         <Card>
         <CardImg
           top
@@ -50,6 +53,8 @@ const SightingCards = (props) => {
           <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button>
         </CardBody>
       </Card>
+      // </Col>
+      // </div>
       )
     }
     )

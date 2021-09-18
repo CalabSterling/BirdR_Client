@@ -15,8 +15,12 @@ const ButtonContainer = styled.button`
     color: #fff;
     font-size: 22px;
     border: none;
-    background-color: rgb(8,150,48);
+    background-color: #677487;
     border-radius: 4px;
+
+    @media (max-width: 1024px) {
+        background-color: black;
+    }
 `;
 
 const Login = (props) => {
@@ -47,7 +51,7 @@ const Login = (props) => {
     console.log(date)
     console.log(birthday)
 
-    return ( 
+    return (
         <Container>
             <Form onSubmit={handleSubmit}>
                     <Label htmlFor="email">Email</Label>
