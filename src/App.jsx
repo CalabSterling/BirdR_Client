@@ -20,6 +20,7 @@ const UserContainer = styled.div`
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
+  const [ID, setID] = useState();
 
   useEffect(() => {
     if (localStorage.getItem('token')){
@@ -33,18 +34,23 @@ function App(props) {
     console.log(sessionToken);
   }
 
+  const updateID = (newID) => {
+    setID(newID);
+    localStorage.setItem('ID', newID);
+  }
+
   const clearToken = () => {
     localStorage.clear();
     setSessionToken('');
   }
 
   const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken}/> : <Auth updateToken={updateToken}/>)
+    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken}/> : <Auth updateToken={updateToken} updateID={updateID}/>)
   };
 
   return (
     <SiteContainer>
-      {sessionToken === '' ? null : <Sitebar clickLogout={clearToken}/>}
+      {localStorage.getItem('token') === sessionToken ? <Sitebar clickLogout={clearToken} />: null }
       <UserContainer>
         {protectedViews()}
       </UserContainer>

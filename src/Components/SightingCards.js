@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardImg,
@@ -8,9 +8,15 @@ import {
   CardSubtitle,
   Button,
 } from "reactstrap";
+import ImageExpander from "./ImageExpander";
+
 
 
 const SightingCards = (props) => {
+  const [state, setState] = useState(false);
+  const [image, setImage] = useState('');
+  const [src, setSrc] = useState('');
+
   
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
@@ -22,13 +28,14 @@ const SightingCards = (props) => {
     }).then(() => props.fetchSightings());
   };
 
-  // console.log(typeof props.sightings.map(owner => String(owner.owner_id))
-  // console.log(typeof props.sightings.owner_id)
-  // console.log(typeof localStorage.getItem('ID'))
-  
   const sightingMapper = () => {
-    return props.sightings.map((sighting, index) => {
-      console.log(sighting.owner_id.toString());
+    return props.sightings.map((sighting, index, array) => {
+
+      function expandImage() {
+        setState(!state)
+        setImage(sighting.image)
+      }
+
       return (
         <Card>
         <CardImg
@@ -36,8 +43,9 @@ const SightingCards = (props) => {
           width="100%"
           src={sighting.image}
           alt="There should be a bird here"
+          onClick={expandImage}
         />
-        <CardBody key={index}>
+        <CardBody key={array[index]}>
           <CardTitle tag="h5">{sighting.bird}</CardTitle>
           <CardSubtitle tag="h6" className="mb-2 text-muted">
             {sighting.time}
@@ -53,6 +61,7 @@ const SightingCards = (props) => {
           { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
 
           { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
+          
         </CardBody>
       </Card>
       )
@@ -64,6 +73,7 @@ return (
       <Card striped>
         <CardBody>
           {sightingMapper()}
+          {state === true ? <ImageExpander image={image}/> : null}
         </CardBody>
       </Card>
     </div>
