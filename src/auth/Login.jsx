@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { Input, Form, Label } from 'reactstrap';
 import styled from "styled-components";
-import Birthday from './Birthday';
 
 const Container = styled.div`
     margin: 0;
@@ -21,8 +20,6 @@ const ButtonContainer = styled.button`
 const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [firstName, setFirstName] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,8 +33,11 @@ const Login = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.sessionToken);
-            console.log(data.user.id)
-            localStorage.setItem('ID', data.user.id)
+            props.updateID(data.ID);
+            console.log(data);
+        }).catch(err => {
+            alert("failed to login");
+            console.log(err)
         })
     }
 

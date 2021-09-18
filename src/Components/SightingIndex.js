@@ -42,7 +42,6 @@ const SightingIndex = (props) => {
 
     return(
         <Container>
-            {}
             <Row>
                 <Col md="3">
                      <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
