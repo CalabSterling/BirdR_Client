@@ -5,7 +5,7 @@ import Auth from './auth/Auth';
 import SightingIndex from './Components/SightingIndex';
 import styled from 'styled-components';
 import background from './Assets/backgroundimage4.jpg'
-import WebFont from 'webfontloader'
+
 
 
 
