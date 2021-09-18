@@ -15,7 +15,6 @@ import ImageExpander from "./ImageExpander";
 const SightingCards = (props) => {
   const [state, setState] = useState(false);
   const [image, setImage] = useState('');
-  const [src, setSrc] = useState('');
 
   
   const deleteSighting = (sighting) => {
@@ -28,11 +27,13 @@ const SightingCards = (props) => {
     }).then(() => props.fetchSightings());
   };
 
+  
   const sightingMapper = () => {
     return props.sightings.map((sighting, index, array) => {
 
-      function expandImage() {
-        setState(!state)
+      function expandImage(event) {
+        event.preventDefault();
+        setState(!state);
         setImage(sighting.image)
       }
 

@@ -38,7 +38,7 @@ const SightingIndex = (props) => {
 
     useEffect(() => {
         fetchSightings();
-    })
+    }, [])
 
     return(
         <Container>
