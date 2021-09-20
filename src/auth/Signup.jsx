@@ -36,6 +36,7 @@ const Signup = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.sessionToken)
+            console.log(data.sessionToken)
         })
     }
 
@@ -55,7 +56,7 @@ const Signup = (props) => {
             <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username} type="email" placeholder="Username"/>
             <br />
             <Label htmlFor="password">Password</Label>
-            <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} type="password" placeholder="Password"/>
+            <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} type="password" placeholder="Password" pattern="[A-Za-z]{8}" required title="8 characters minimum"/>
             <br />
             <ButtonContainer type="submit" >Signup</ButtonContainer>
             <br />

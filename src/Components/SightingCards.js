@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardImg,
@@ -10,6 +10,7 @@ import {
   CardDeck
 } from "reactstrap";
 import styled from "styled-components";
+import ImageExpander from "./ImageExpander";
 import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/Fonts/cards.style'
 
 const CardContainer = styled.div`
@@ -30,7 +31,11 @@ position: relative;
 
 
 
+
 const SightingCards = (props) => {
+  const [state, setState] = useState(false);
+  const [image, setImage] = useState('');
+
   
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
@@ -41,14 +46,22 @@ const SightingCards = (props) => {
       }),
     }).then(() => props.fetchSightings());
   };
+
   
   const sightingMapper = () => {
-    return props.sightings.map((sighting, index) => {
+    return props.sightings.map((sighting, index, array) => {
+
+      function expandImage(event) {
+        event.preventDefault();
+        setState(!state);
+        setImage(sighting.image)
+      }
+
       return (
         <TheCardDeck>
         <Card>
         
-        <CardBody key={index}>
+        <CardBody key={[index]}>
           <Title>{sighting.bird}</Title>
           <Loc>@{sighting.location}</Loc>
           <CardImg
@@ -56,14 +69,16 @@ const SightingCards = (props) => {
           width="100%"
           src={sighting.image}
           alt="There should be a bird here"
+          onClick={expandImage}
         />
           
           <TimDat>Time:{sighting.time} Date:{sighting.date}<RarityRating>Rarity Rating: {sighting.rarity}</RarityRating></TimDat>
           <Description>{sighting.description}</Description>
           
-          <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button>
+          { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
 
-          <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button>
+          { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
+          
         </CardBody>
       </Card>
       </TheCardDeck>
@@ -77,11 +92,14 @@ return (
     <DisplayCard>
           <CardDeck>
           {sightingMapper()}
+          {state === true ? <ImageExpander image={image}/> : null}
           </CardDeck>
         </DisplayCard>
         </CardContainer>
-    </div>
+        </div>
+          
 )
 }
+
 
 export default SightingCards;

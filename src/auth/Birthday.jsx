@@ -9,7 +9,7 @@ import {
 const Birthday = (props) => {
     return ( 
         <Modal>
-            <ModalHeader>Happy Birthday, {props.firstName}</ModalHeader>
+            <ModalHeader>Happy Birthday</ModalHeader>
             <ModalBody>
                 BirdR wants to wish you a Happy Birthday!
             </ModalBody>

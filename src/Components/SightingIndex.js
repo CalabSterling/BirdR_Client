@@ -20,7 +20,6 @@ const SightingIndex = (props) => {
         }).then( (res) => res.json())
         .then((sightingData) => {
             setSightings(sightingData)
-           // console.log(sightingData);
         })
     }
 
