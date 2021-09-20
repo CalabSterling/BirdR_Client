@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'reactstrap';
+import { Button, CardColumns, Modal } from 'reactstrap';
+import WeatherChild from './WeatherChild';
 
 
 const WeatherParent = (props) => {
@@ -22,7 +23,7 @@ const WeatherParent = (props) => {
         const dailyData = data.list.filter(reading => reading.dt_txt.includes("15:00:00"))
         console.log(data);
         console.log(dailyData);
-        // setWeather(data.main);
+        setWeather(dailyData);
     };
 
     const handleClick=(event)=>{
@@ -30,11 +31,18 @@ const WeatherParent = (props) => {
         fetchURL();
     };
 
+    function displayWeather () {
+        return (weather.map(dailyData => <WeatherChild key={dailyData.weather[0]} temp={dailyData.main.temp} feelslike={dailyData.main.feels_like} description={dailyData.weather[0].description} />))
+    }
+
     return ( 
         <div>
             <Button onClick={handleClick}>Click for Weather</Button>
+        
+            <CardColumns>{displayWeather()}</CardColumns>
+        
         </div>
      );
-}
+};
  
 export default WeatherParent;

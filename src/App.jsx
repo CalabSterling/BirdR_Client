@@ -1,12 +1,13 @@
 // import './App.css';
 import React, {useState, useEffect} from 'react';
-import Sitebar from './Components/Navbar'
+// import Sitebar from './Components/Navbar'
 import Auth from './auth/Auth';
 import SightingIndex from './Components/SightingIndex';
 import styled from 'styled-components';
 import background from './Assets/backgroundimage1.jpg';
 import background2 from './Assets/backgroundimage9.jpg'
 import { Button } from 'reactstrap';
+import Footer from './Components/Footer'
 
 
 
@@ -85,11 +86,13 @@ function App(props) {
   return (
     <BirdBackground>
     <SiteContainer>
-         {sessionToken === '' ? null : <Sitebar clickLogout={clearToken}/>}
+         {sessionToken === '' ? null : <SightingIndex clickLogout={clearToken}/>}
       <UserContainer>
         {protectedViews()}
       </UserContainer>
+      <Footer />
     </SiteContainer>
+    
     </BirdBackground>
   );
 }
