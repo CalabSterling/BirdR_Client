@@ -18,23 +18,8 @@ const WeatherParent = (props) => {
    } else {
        console.log('geolocation is not available')
    };
-   
-   
-   const fetchURL = async () => {
-        const response = await fetch(url);
-        const data = await response.json();
-        const dailyData = data.list.filter(reading => reading.dt_txt.includes("15:00:00"))
-        console.log(data);
-        console.log(dailyData);
-        setWeather(dailyData);
-    };
 
     const toggle = () => setModal(!modal);
-
-    // const handleClick=(event)=>{
-    //     event.preventDefault();
-    //     fetchURL();
-    // };
 
     useEffect(() => {
         const fetchURL = async () => {
