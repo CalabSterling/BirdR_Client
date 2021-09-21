@@ -103,7 +103,6 @@ const Auth = (props) => {
 
     let hour = new Date().getHours()
 
-
     return (
         <Row>
         <Column span="3">
@@ -121,7 +120,7 @@ const Auth = (props) => {
                 </HeaderContainer>
             </TopContainer>
             <InnerContainer>
-                {active === 'login' ? <Login switchToSignup={switchToSignup} updateToken={props.updateToken}/> : <Signup switchToLogin={switchToLogin} updateToken={props.updateToken}/>}
+                {active === 'login' ? <Login switchToSignup={switchToSignup} updateToken={props.updateToken} updateID={props.updateID}/> : <Signup switchToLogin={switchToLogin} updateToken={props.updateToken}/>}
             </InnerContainer>
         </Container>
         </Column>

@@ -3,8 +3,9 @@
   padding: 5% 18% 8% 10%;
   background-color: blue;
   border: none;
-  margin-bottom: 15%;
+  margin-bottom: 5%;
 };
+
 
 #addABirdNav {
   padding-bottom: 0%;
@@ -21,7 +22,7 @@
 }
 
 .sightingNavItem {
-  margin-top: 10%;
+  margin-top: 5%;
   padding-top: 5%;
 
 }

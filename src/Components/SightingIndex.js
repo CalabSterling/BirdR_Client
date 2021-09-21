@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import { Button, Container, NavbarBrand, NavbarToggler, Collapse, Navbar, Nav, NavItem, NavLink, Row, Col, CardDeck, CardColumns } from 'reactstrap';
+import { Button, Container, NavbarBrand, NavbarToggler, Collapse, Navbar, Nav, NavItem, NavLink, Row, Col, CardDeck, CardColumns, UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 import SightingCreate from './SightingCreate';
 import SightingCards from './SightingCards';
 import SightingEdit from './SightingEdit';
@@ -60,7 +60,6 @@ const SightingIndex = (props) => {
         }).then( (res) => res.json())
         .then((sightingData) => {
             setSightings(sightingData)
-           // console.log(sightingData);
         })
     }
 
@@ -109,6 +108,25 @@ const SightingIndex = (props) => {
                         <NavItem className="sightingNavItem">
                         <Button onClick={props.clickLogout} className="sighting-button">Logout</Button>
                         </NavItem>
+                        <NavItem className="sightingNavItem">
+                        <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Options
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  Option 1
+                </DropdownItem>
+                <DropdownItem>
+                  Option 2
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>
+                  Reset
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            </NavItem>
                     </Nav>
                 </Collapse>
                 </Navbar>

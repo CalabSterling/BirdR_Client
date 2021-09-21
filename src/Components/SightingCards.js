@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardImg,
@@ -7,11 +7,35 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
-  Col
+  CardDeck
 } from "reactstrap";
+import styled from "styled-components";
+import ImageExpander from "./ImageExpander";
+import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/Fonts/cards.style'
+
+const CardContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5%;
+    margin-bottom: 5%;
+    text-align: left;
+    
+    
+`
+
+const DisplayCard = styled.section`
+padding-bottom: 10%;
+margin: 5%;
+position: relative;
+`
+
+
 
 
 const SightingCards = (props) => {
+  const [state, setState] = useState(false);
+  const [image, setImage] = useState('');
+
   
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
@@ -22,52 +46,64 @@ const SightingCards = (props) => {
       }),
     }).then(() => props.fetchSightings());
   };
+
   
   const sightingMapper = () => {
-    return props.sightings.map((sighting, index) => {
+    return props.sightings.map((sighting, index, array) => {
+
+      function expandImage(event) {
+        event.preventDefault();
+        setState(!state);
+        setImage(sighting.image)
+      }
+
       return (
         // <div>
           // <Col md="8">
+        <TheCardDeck>
         <Card>
-        <CardImg
+        
+        <CardBody key={[index]}>
+          <Title>{sighting.bird}</Title>
+          <Loc>@{sighting.location}</Loc>
+          <CardImg
           top
           width="100%"
           src={sighting.image}
           alt="There should be a bird here"
+          onClick={expandImage}
         />
-        <CardBody key={index}>
-          <CardTitle tag="h5">{sighting.bird}</CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">
-            {sighting.time}
-          </CardSubtitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">
-            {sighting.date}
-          </CardSubtitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">
-            {sighting.location}
-          </CardSubtitle>
-          <CardText>{sighting.description}</CardText>
           
-          <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button>
+          <TimDat>Time:{sighting.time} Date:{sighting.date}<RarityRating>Rarity Rating: {sighting.rarity}</RarityRating></TimDat>
+          <Description>{sighting.description}</Description>
+          
+          { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
 
-          <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button>
+          { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
+          
         </CardBody>
       </Card>
-      // </Col>
-      // </div>
+       {/* </Col> */}
+      {/* </div> */}
+      </TheCardDeck>
       )
     }
     )
 }
 return (
   <div>
-      <Card striped>
-        <CardBody>
+    <CardContainer>
+    <DisplayCard>
+          <CardDeck>
           {sightingMapper()}
-        </CardBody>
-      </Card>
-    </div>
+          {state === true ? <ImageExpander image={image}/> : null}
+          </CardDeck>
+        </DisplayCard>
+        </CardContainer>
+        </div>
+          
 )
 }
+
 
 export default SightingCards;

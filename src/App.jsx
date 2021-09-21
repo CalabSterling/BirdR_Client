@@ -1,11 +1,11 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
-// import Sitebar from './Components/Navbar'
+// import Sitebar from './Components/Navbar';
 import Auth from './auth/Auth';
 import SightingIndex from './Components/SightingIndex';
 import styled from 'styled-components';
 import background from './Assets/backgroundimage1.jpg';
-import background2 from './Assets/backgroundimage9.jpg'
+import background2 from './Assets/backgroundimage9.jpg';
 import { Button } from 'reactstrap';
 
 
@@ -48,7 +48,8 @@ const UserContainer = styled.div`
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
-  
+  const [ID, setID] = useState();
+
   useEffect(() => {
     if (localStorage.getItem('token')){
       setSessionToken(localStorage.getItem('token'));
@@ -63,19 +64,25 @@ function App(props) {
     console.log(sessionToken);
   }
 
+  const updateID = (newID) => {
+    setID(newID);
+    localStorage.setItem('ID', newID);
+  }
+
   const clearToken = () => {
     localStorage.clear();
     setSessionToken('');
   }
 
   const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken}/> : <Auth updateToken={updateToken}/>)
+    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken}/> : <Auth updateToken={updateToken} updateID={updateID}/>)
   };
 
   return (
     <BirdBackground>
     <SiteContainer>
-         {sessionToken === '' ? null : <SightingIndex clickLogout={clearToken}/>}
+    {/* {sessionToken === '' ? null : <SightingIndex clickLogout={clearToken}/>} */}
+      {localStorage.getItem('token') === sessionToken ? <SightingIndex clickLogout={clearToken} />: null }
       <UserContainer>
         {protectedViews()}
       </UserContainer>
