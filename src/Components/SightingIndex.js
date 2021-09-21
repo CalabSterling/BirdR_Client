@@ -45,9 +45,9 @@ const SightingIndex = (props) => {
             <Row>
                 <Col md="3">
                      <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
-                 </Col>
+                 </Col> 
                  <Col md="9">
-                     <SightingCards sightings={sightings} fetchSightings={fetchSightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} token={props.token} />
+                      <SightingCards sightings={sightings} fetchSightings={fetchSightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} token={props.token} updateSightingFeed={props.updateSightingFeed}/> 
                 </Col>
                 {updateActive ? <SightingEdit sightingToUpdate={sightingToUpdate} updateOff={updateOff} token={props.token} fetchSightings={fetchSightings} /> : <></>}
             </Row>

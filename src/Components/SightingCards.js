@@ -58,6 +58,8 @@ const SightingCards = (props) => {
       }
 
       return (
+        <div>
+        { (sighting.owner_id.toString() === localStorage.getItem('ID') && props.updateSightingFeed === 'mine') ?
         <TheCardDeck>
         <Card>
         
@@ -81,7 +83,37 @@ const SightingCards = (props) => {
           
         </CardBody>
       </Card>
-      </TheCardDeck>
+      </TheCardDeck> : 
+
+        (props.updateSightingFeed === 'global') ? 
+
+        <TheCardDeck>
+        <Card>
+        
+        <CardBody key={[index]}>
+          <Title>{sighting.bird}</Title>
+          <Loc>@{sighting.location}</Loc>
+          <CardImg
+          top
+          width="100%"
+          src={sighting.image}
+          alt="There should be a bird here"
+          onClick={expandImage}
+        />
+          
+          <TimDat>Time:{sighting.time} Date:{sighting.date}<RarityRating>Rarity Rating: {sighting.rarity}</RarityRating></TimDat>
+          <Description>{sighting.description}</Description>
+          
+          { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
+
+          { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
+          
+        </CardBody>
+      </Card>
+      </TheCardDeck> : 
+      <></>}
+
+      </div>
       )
     }
     )
