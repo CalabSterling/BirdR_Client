@@ -7,8 +7,28 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
+  CardDeck
 } from "reactstrap";
+import styled from "styled-components";
 import ImageExpander from "./ImageExpander";
+import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/Fonts/cards.style'
+
+const CardContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5%;
+    margin-bottom: 5%;
+    text-align: left;
+    
+    
+`
+
+const DisplayCard = styled.section`
+padding-bottom: 10%;
+margin: 5%;
+position: relative;
+`
+
 
 
 
@@ -43,36 +63,35 @@ const SightingCards = (props) => {
       return (
       <div>
       { (sighting.owner_id.toString() === localStorage.getItem('ID') && props.updateSightingFeed === 'mine') ?
-      <Card>
-        <CardImg
+
+        <TheCardDeck>
+        <Card>
+        
+        <CardBody key={[index]}>
+          <Title>{sighting.bird}</Title>
+          <Loc>@{sighting.location}</Loc>
+          <CardImg
           top
           width="100%"
           src={sighting.image}
           alt="There should be a bird here"
           onClick={expandImage}
         />
-        <CardBody key={array[index]}>
-          <CardTitle tag="h5">{sighting.bird}</CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">
-            {sighting.time}
-          </CardSubtitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">
-            {sighting.date}
-          </CardSubtitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">
-            {sighting.location}
-          </CardSubtitle>
-          <CardText>{sighting.description}</CardText>
+          
+          <TimDat>Time:{sighting.time} Date:{sighting.date}<RarityRating>Rarity Rating: {sighting.rarity}</RarityRating></TimDat>
+          <Description>{sighting.description}</Description>
           
           { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
 
           { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
           
         </CardBody>
-      </Card> : 
+      </Card>
+      </TheCardDeck> : 
       
       (props.updateSightingFeed === 'global') ? 
-
+            
+       <TheCardDeck>
         <Card>
           <CardImg
             top
@@ -99,23 +118,28 @@ const SightingCards = (props) => {
             { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
             
           </CardBody>
-        </Card> :
+        </Card> 
+       </TheCardDeck> :
        <></> }
-      </div>
-      )
-    }
+    </div>
     )
+    })
 }
+
 return (
   <div>
-      <Card striped>
-        <CardBody>
+    <CardContainer>
+    <DisplayCard>
+          <CardDeck>
           {sightingMapper()}
           {state === true ? <ImageExpander image={image}/> : null}
-        </CardBody>
-      </Card>
-    </div>
+          </CardDeck>
+        </DisplayCard>
+        </CardContainer>
+        </div>
+          
 )
 }
+
 
 export default SightingCards;
