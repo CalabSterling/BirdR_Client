@@ -5,21 +5,18 @@ import SightingCards from './SightingCards';
 import SightingEdit from './SightingEdit';
 import WeatherParent from './WeatherParent';
 import styled from 'styled-components';
-// import newBackground from '../Assets/backgroundimage4.jpg';
 
 const NewBackground = styled.body`
     background-color: lightblue;
     height: 100%;
     width: 100vw;
     margin-top: 0px;
-    /* padding-top: 0%; */
 `;
 
 const IndexDiv = styled.div`
     margin-top: 0%;
     padding-top: 0%;
     display: block;
-
 `;
 
 const Sidebar = styled.div`
@@ -85,53 +82,44 @@ const SightingIndex = (props) => {
     }, [])
 
     return(
-        <IndexDiv>
+        <IndexDiv id="sightingIndex">
         <NewBackground>
             
         <Container>
         <Row>
             <Col md="4">  
             <Sidebar>
-                <Navbar light expand="md">
+                <Navbar light expand="md" id="Navbar">
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav vertical>
-                    <NavbarBrand href="/">reactstrap</NavbarBrand>
-                        <NavItem>
-                            <NavLink href="#">BirdR</NavLink>
-                        </NavItem>
-                        <NavItem>
+                    <NavbarBrand href="#sightingIndex" id="birdr">BirdR</NavbarBrand>
+                        <NavItem className="sightingNavItem" id="addABirdNav">
                             <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
                         </NavItem>
-                        <NavItem>
+                        <NavItem className="sightingNavItem">
+                            <NavLink href="https://www.aba.org/aba-checklist/" target='_blank'>Rarity Rating Reference</NavLink>
+                        </NavItem>
+                        <NavItem className="sightingNavItem">
                             <WeatherParent position={position} />
                         </NavItem>
-                        <NavItem>
-                            <NavLink href="#">BirdR</NavLink>
+                        <NavItem className="sightingNavItem">
+                            <NavLink href="http://hint.fm/wind/" target="_blank">Wind Conditions</NavLink>
                         </NavItem>
-                        <NavItem>
-                        <Button onClick={props.clickLogout}>Logout</Button>
+                        <NavItem className="sightingNavItem">
+                        <Button onClick={props.clickLogout} className="sighting-button">Logout</Button>
                         </NavItem>
                     </Nav>
                 </Collapse>
                 </Navbar>
-                </Sidebar>
-            {/* <Row>
-                <Col md="4"> */}
-                     {/* <SightingCreate fetchSightings={fetchSightings} token={props.token}/> */}
-                 </Col>
+            </Sidebar>
+            </Col>
                  <Col md="8">
-                     {/* <CardDeck> */}
                      <SightingCards sightings={sightings} fetchSightings={fetchSightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} token={props.token} />
-                     {/* </CardDeck> */}
                 </Col>
                 {updateActive ? <SightingEdit sightingToUpdate={sightingToUpdate} updateOff={updateOff} token={props.token} fetchSightings={fetchSightings} /> : <></>}
             </Row>
         </Container>
-        
-        <div>
-           {/* <WeatherParent position={position} />  */}
-        </div>
         </NewBackground>
         </IndexDiv>
     )

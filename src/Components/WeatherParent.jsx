@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, CardColumns, Modal } from 'reactstrap';
+import { Button, CardColumns, Modal, ModalHeader, ModalBody, ModalFooter,
+ } from 'reactstrap';
 import WeatherChild from './WeatherChild';
 
 
 const WeatherParent = (props) => {
     const [weather, setWeather] = useState([]);
+    const [modal, setModal] = useState(false);
     console.log (props.position)
     const key = '507c0093dc310b7d686f061c38a076e9';
     let lat = (props.position.lat);
@@ -16,7 +18,8 @@ const WeatherParent = (props) => {
    } else {
        console.log('geolocation is not available')
    };
-    
+   
+   
    const fetchURL = async () => {
         const response = await fetch(url);
         const data = await response.json();
@@ -26,21 +29,42 @@ const WeatherParent = (props) => {
         setWeather(dailyData);
     };
 
-    const handleClick=(event)=>{
-        event.preventDefault();
-        fetchURL();
-    };
+    const toggle = () => setModal(!modal);
 
-    function displayWeather () {
-        return (weather.map(dailyData => <WeatherChild key={dailyData.weather[0]} temp={dailyData.main.temp} feelslike={dailyData.main.feels_like} description={dailyData.weather[0].description} />))
-    }
+    // const handleClick=(event)=>{
+    //     event.preventDefault();
+    //     fetchURL();
+    // };
+
+    useEffect(() => {
+        const fetchURL = async () => {
+            const response = await fetch(url);
+            const data = await response.json();
+            const dailyData = data.list.filter(reading => reading.dt_txt.includes("15:00:00"))
+            console.log(data);
+            console.log(dailyData);
+            setWeather(dailyData);
+        };
+        fetchURL();
+    }, [url]);
+
+    const displayWeather = () => weather.map((forecast, index) => <WeatherChild key={String(index)} forecast={forecast} />);
 
     return ( 
         <div>
-            <Button onClick={handleClick}>Click for Weather</Button>
+            <Button onClick={toggle} className="sighting-button">Weather</Button>
+            <div className="row justify-content-center">
+            <Modal isOpen={modal} toggle={toggle} contentClassName="custom-modal-style">
+                <ModalHeader toggle={toggle}>5 Day Forecast</ModalHeader>
+                <ModalBody>
         
             <CardColumns>{displayWeather()}</CardColumns>
-        
+            </ModalBody>
+            <ModalFooter>
+                <Button onClick={toggle}>Close</Button>
+            </ModalFooter>
+            </Modal>
+            </div>
         </div>
      );
 };

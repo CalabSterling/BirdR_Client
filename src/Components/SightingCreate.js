@@ -61,7 +61,7 @@ const SightingCreate = (props) => {
 
     return(
         <div>
-            <Button color="success" onClick={toggle}>Add a Bird</Button>
+            <Button onClick={toggle} className="sighting-button">Add a Bird</Button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Add A Bird!</ModalHeader>
                 <ModalBody>
