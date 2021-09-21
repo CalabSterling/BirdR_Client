@@ -36,9 +36,14 @@ const SightingCards = (props) => {
         setState(!state);
         setImage(sighting.image)
       }
+      console.log(localStorage.getItem('ID'))
+      console.log(sighting.owner_id.toString())
+      console.log(props.updateSightingFeed)
 
       return (
-        <Card>
+      <div>
+      { (sighting.owner_id.toString() === localStorage.getItem('ID') && props.updateSightingFeed === 'mine') ?
+      <Card>
         <CardImg
           top
           width="100%"
@@ -64,7 +69,39 @@ const SightingCards = (props) => {
           { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
           
         </CardBody>
-      </Card>
+      </Card> : 
+      
+      (props.updateSightingFeed === 'global') ? 
+
+        <Card>
+          <CardImg
+            top
+            width="100%"
+            src={sighting.image}
+            alt="There should be a bird here"
+            onClick={expandImage}
+          />
+          <CardBody key={array[index]}>
+            <CardTitle tag="h5">{sighting.bird}</CardTitle>
+            <CardSubtitle tag="h6" className="mb-2 text-muted">
+              {sighting.time}
+            </CardSubtitle>
+            <CardSubtitle tag="h6" className="mb-2 text-muted">
+              {sighting.date}
+            </CardSubtitle>
+            <CardSubtitle tag="h6" className="mb-2 text-muted">
+              {sighting.location}
+            </CardSubtitle>
+            <CardText>{sighting.description}</CardText>
+            
+            { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
+
+            { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
+            
+          </CardBody>
+        </Card> :
+       <></> }
+      </div>
       )
     }
     )
