@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Nav, NavItem, NavLink, Button } from 'reactstrap';
 
 const Navbar = (props) => {
+
   return (
     <div>
       <Nav>
@@ -9,7 +10,13 @@ const Navbar = (props) => {
           <NavLink href="#">Link</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#">Link</NavLink>
+          <NavLink href="#"></NavLink>
+        </NavItem>
+        <NavItem>
+          <Button onClick={props.updateFeedMine}> My Sightings</Button>
+        </NavItem>
+        <NavItem>
+          <Button onClick={props.updateFeedGlobal}> Global Sightings</Button>
         </NavItem>
         <NavItem>
           <Button onClick={props.clickLogout}>Logout</Button>

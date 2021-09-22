@@ -35,8 +35,11 @@ position: relative;
 const SightingCards = (props) => {
   const [state, setState] = useState(false);
   const [image, setImage] = useState('');
-
+  const [sightingIndex, setSightingIndex] = useState('');
+  const [likeCount, setLikeCount] = useState(0);
   
+    console.log(props.sightings)
+
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
       method: "DELETE",
@@ -46,6 +49,28 @@ const SightingCards = (props) => {
       }),
     }).then(() => props.fetchSightings());
   };
+
+    const UpdateLikes = (sighting) => {
+            setLikeCount(likeCount + 1);
+    if(sighting === undefined) {
+        console.log("nothing here")
+    } else {
+        fetch(`http://localhost:3000/sighting/updateLikes/${sighting.id}`, {
+      method: `PUT`,
+      body: JSON.stringify({
+        sighting: {
+          likes: likeCount
+        }}),
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+    }).then((res) => {props.fetchSightings()})
+    }}
+
+  function hoverHum(e) {
+    Button.style.cursor = 'url("https://downloads.totallyfreecursors.com/cursor_files/hummingbird.cur"), url("https://downloads.totallyfreecursors.com/thumbnails/hummingbird1.gif"), auto;'
+  }
+
 
   
   const sightingMapper = () => {
@@ -58,6 +83,8 @@ const SightingCards = (props) => {
       }
 
       return (
+        <div>
+        { (sighting.owner_id.toString() === localStorage.getItem('ID') && props.updateSightingFeed === 'mine') ?
         <TheCardDeck>
         <Card>
         
@@ -75,13 +102,47 @@ const SightingCards = (props) => {
           <TimDat>Time:{sighting.time} Date:{sighting.date}<RarityRating>Rarity Rating: {sighting.rarity}</RarityRating></TimDat>
           <Description>{sighting.description}</Description>
           
+          <Button onClick={() => {UpdateLikes(sighting)}}>Like</Button>
+
           { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
 
           { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
           
         </CardBody>
       </Card>
-      </TheCardDeck>
+      </TheCardDeck> : 
+
+        (props.updateSightingFeed === 'global') ? 
+
+        <TheCardDeck>
+        <Card>
+        
+        <CardBody key={[index]}>
+          <Title>{sighting.bird}</Title>
+          <Loc>@{sighting.location}</Loc>
+          <CardImg
+          top
+          width="100%"
+          src={sighting.image}
+          alt="There should be a bird here"
+          onClick={expandImage}
+        />
+          
+          <TimDat>Time:{sighting.time} Date:{sighting.date}<RarityRating>Rarity Rating: {sighting.rarity}</RarityRating></TimDat>
+          <Description>{sighting.description}</Description>
+          
+          <Button onClick={() => {UpdateLikes(sighting)}}>Like</Button>
+
+          { sighting.owner_id.toString() === localStorage.getItem('ID') ? <Button color="warning" onClick={() => {props.editUpdateSighting(sighting); props.updateOn()}}> Edit </Button> : null }
+
+          { localStorage.getItem('ID') === sighting.owner_id.toString() ? <Button color="danger" onClick={() => {deleteSighting(sighting)}}>Delete</Button> : null }
+          
+        </CardBody>
+      </Card>
+      </TheCardDeck> : 
+      <></>}
+
+      </div>
       )
     }
     )

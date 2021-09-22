@@ -32,10 +32,10 @@ margin: auto;
 `
 
 
-
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
-  const [ID, setID] = useState();
+  const [ID, setID] = useState('');
+  const [updateSightingFeed, setUpdateSightingFeed] = useState('global');
 
   useEffect(() => {
     if (localStorage.getItem('token')){
@@ -59,14 +59,24 @@ function App(props) {
     setSessionToken('');
   }
 
+  const updateFeedMine = () => {
+    setUpdateSightingFeed('mine');
+    console.log(updateSightingFeed)
+  }
+
+  const updateFeedGlobal = () => {
+    setUpdateSightingFeed('global');
+    console.log(updateSightingFeed)
+  }
+
   const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken}/> : <Auth updateToken={updateToken} updateID={updateID}/>)
+    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken} updateSightingFeed={updateSightingFeed}/> : <Auth updateToken={updateToken} updateID={updateID} />)
   };
 
   return (
     <BirdBackground>
     <SiteContainer>
-      {localStorage.getItem('token') === sessionToken ? <Sitebar clickLogout={clearToken} />: null }
+      {localStorage.getItem('token') === sessionToken ? <Sitebar clickLogout={clearToken} updateFeedMine={updateFeedMine} updateFeedGlobal={updateFeedGlobal} />: null }
       <UserContainer>
         {protectedViews()}
       </UserContainer>
