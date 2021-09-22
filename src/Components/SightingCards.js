@@ -35,10 +35,9 @@ position: relative;
 const SightingCards = (props) => {
   const [state, setState] = useState(false);
   const [image, setImage] = useState('');
-  const [sightingIndex, setSightingIndex] = useState('');
   const [likeCount, setLikeCount] = useState(0);
   
-    console.log(props.sightings)
+    console.log(props.privacy)
 
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
@@ -66,11 +65,6 @@ const SightingCards = (props) => {
         })
     }).then((res) => {props.fetchSightings()})
     }}
-
-  function hoverHum(e) {
-    Button.style.cursor = 'url("https://downloads.totallyfreecursors.com/cursor_files/hummingbird.cur"), url("https://downloads.totallyfreecursors.com/thumbnails/hummingbird1.gif"), auto;'
-  }
-
 
   
   const sightingMapper = () => {
@@ -112,7 +106,7 @@ const SightingCards = (props) => {
       </Card>
       </TheCardDeck> : 
 
-        (props.updateSightingFeed === 'global') ? 
+        (props.updateSightingFeed === 'global' && sighting.private1 === "false") ? 
 
         <TheCardDeck>
         <Card>
