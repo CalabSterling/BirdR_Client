@@ -37,9 +37,9 @@ const WeatherParent = (props) => {
 
     return ( 
         <div>
-            <Button onClick={toggle} className="sighting-button">Weather</Button>
+            <Button onClick={toggle} className="sighting-button">5 Day Forecast</Button>
             <div className="row justify-content-center">
-            <Modal isOpen={modal} toggle={toggle} contentClassName="custom-modal-style">
+            <Modal isOpen={modal} toggle={toggle} contentClassName="weather-modal">
                 <ModalHeader toggle={toggle}>5 Day Forecast</ModalHeader>
                 <ModalBody>
         

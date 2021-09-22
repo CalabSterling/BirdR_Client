@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import styled from 'styled-components';
+import { BirdTitle, Information, SubmitButton, CloseButton } from './Styling_Components/create.style';
+
+
+const Create = styled.div `
+    font-family: 'Amatic SC', cursive;
+    /* width: 200%; */
+`;
 
 
 const SightingCreate = (props) => {
@@ -60,15 +68,16 @@ const SightingCreate = (props) => {
     };
 
     return(
-        <div>
+        <Create>
             <Button onClick={toggle} className="sighting-button">Add a Bird</Button>
-            <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Add A Bird!</ModalHeader>
+            <Modal isOpen={modal} toggle={toggle} id="add-a-bird">
+                <ModalHeader toggle={toggle}><BirdTitle>Add A Bird!</BirdTitle></ModalHeader>
                 <ModalBody>
             <Form onSubmit={handleSubmit}>
+                <Information>
                 <FormGroup>
                     <Label htmlFor="bird"/>
-                    <Input name="bird" value={bird} placeholder="Bird" onChange={(e) => setBird(e.target.value)} />
+                    <Input name="bird" value={bird} placeholder="Bird" onChange={(e) => setBird(e.target.value)}/>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="location"/>
@@ -103,16 +112,16 @@ const SightingCreate = (props) => {
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </Input>
-
                 </FormGroup>
-                <Button type="submit" onClick={toggle}>Click to Submit</Button>
+                </Information>
+                <SubmitButton type="submit" onClick={toggle}>Click to Submit</SubmitButton>
             </Form>
             </ModalBody>
             <ModalFooter>
-                <Button onClick={toggle}>Close</Button>
+                <CloseButton onClick={toggle}>Close</CloseButton>
             </ModalFooter>
             </Modal>
-        </div>
+            </Create>
     );
 };
 

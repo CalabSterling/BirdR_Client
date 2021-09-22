@@ -5,7 +5,6 @@ import SightingIndex from './Components/SightingIndex';
 import styled from 'styled-components';
 import background from './Assets/backgroundimage1.jpg';
 import background2 from './Assets/backgroundimage9.jpg';
-import { Button } from 'reactstrap';
 import Sitebar from './Components/Navbar';
 
 
@@ -36,7 +35,6 @@ const SiteContainer = styled.div`
 
 
 const UserContainer = styled.div`
-  
   padding-top: 0%;
   padding-right: 1%;
 
@@ -49,6 +47,7 @@ function App(props) {
   const [sessionToken, setSessionToken] = useState('');
   const [ID, setID] = useState('');
   const [updateSightingFeed, setUpdateSightingFeed] = useState('potato');
+  const [navbarSight, setNavbarSight] = useState('');
 
   useEffect(() => {
     if (localStorage.getItem('token')){
@@ -85,21 +84,20 @@ function App(props) {
   }
 
   const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken} updateSightingFeed={updateSightingFeed}/> : <Auth updateToken={updateToken} updateID={updateID} />)
+    return (sessionToken === localStorage.getItem('token') ? <SightingIndex navbarSight={setNavbarSight} token={sessionToken} updateSightingFeed={updateSightingFeed}/> : <Auth updateToken={updateToken} updateID={updateID} />)
   };
 
   return (
     <BirdBackground>
     <SiteContainer>
     {/* {sessionToken === '' ? null : <SightingIndex clickLogout={clearToken}/>} */}
-      {localStorage.getItem('token') === sessionToken ? <Sitebar clickLogout={clearToken} updateFeedMine={updateFeedMine} updateFeedGlobal={updateFeedGlobal} />: null }
+      {localStorage.getItem('token') === sessionToken ? <Sitebar navbarSight={navbarSight} clickLogout={clearToken} updateFeedMine={updateFeedMine} updateFeedGlobal={updateFeedGlobal} />: null }
       <UserContainer>
         {protectedViews()}
       </UserContainer>
     </SiteContainer>
-    
     </BirdBackground>
   );
-}
+};
 
 export default App;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Row, Col, Card, CardImg, CardText, CardBody,
+    Row, Col, Card, CardText, CardBody,
     CardTitle, CardSubtitle,
   } from 'reactstrap';
   import styled from 'styled-components';
@@ -12,12 +12,10 @@ const Weather = styled.div`
 
 const WeatherChild = (props) => {
     const {temp, feels_like} = props.forecast.main;
-    const {description, icon} = props.forecast.weather[0];
+    const {description} = props.forecast.weather[0];
     let newDate = new Date();
     const weekday = props.forecast.dt * 1000
-    newDate.setTime(weekday)
-
-    const imgUrl = `owf owf-${props.forecast.weather[0].id} owf-5x`
+    newDate.setTime(weekday);
 
     return ( 
         

@@ -3,9 +3,8 @@
   padding: 5% 18% 8% 10%;
   background-color: blue;
   border: none;
-  margin-bottom: 5%;
+  /* margin-bottom: 2%; */
 };
-
 
 #addABirdNav {
   padding-bottom: 0%;
@@ -19,14 +18,37 @@
 
 #Navbar {
   color: white;
-}
+};
 
 .sightingNavItem {
-  margin-top: 5%;
-  padding-top: 5%;
+  margin-top: 2px;
+  /* padding-top: 5%; */
 
-}
+};
+
+.weather-modal {
+  width: fit-content;
+};
+
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+};
 
 .custom-modal-style {
   width: fit-content;
-}
+  /* justify-content: center; */
+  background: none;
+  border: none;
+};
+
+#expanded-image {
+  width: 140%;
+  height: 140%;
+};
+
+#add-a-bird {
+  font-family: 'AmaticSC';
+};
