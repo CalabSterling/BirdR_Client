@@ -10,7 +10,6 @@ import Sitebar from './Components/Navbar';
 
 const BirdBackground = styled.div`
 background-image: url(${background});
-background-color: #719D80;
 background-size: cover;
 background-position-y: 10%;
 min-height: 100%;
