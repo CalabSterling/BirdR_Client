@@ -6,7 +6,7 @@ import SightingEdit from './SightingEdit';
 import styled from 'styled-components';
 
 const NewBackground = styled.body`
-    background-color: lightblue;
+    background-color: #d3d5c0;
     height: 100%;
     width: 100vw;
     /* margin-top: -150px; */

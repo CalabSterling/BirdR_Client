@@ -24,7 +24,7 @@ border: none;
 `;
 
 export const CloseButton = styled.button`
-background-color: #59724B;
+background-color: #3E7379;
 padding-left: 2%;
 padding-right: 2%;
 color: white;
