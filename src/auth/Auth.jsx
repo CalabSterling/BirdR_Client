@@ -4,15 +4,15 @@ import Login from './Login';
 import styled from 'styled-components';
 
 const LogoContainer = styled.div`
-    font-size: 20px;
+    font-size: 22px;
     font-family: 'Garamond';
-    color: rgb(255, 251, 30);
+    color: white;
     align-items: center;
     justify-content: center;
 `;
 const Container = styled.div`
     width: 280px;
-    min-height: 550px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
@@ -20,15 +20,18 @@ const Container = styled.div`
     box-shadow: 10px 10px 10px rgba(0, 0, 0, .15);
     position: relative;
     overflow: hidden;
+    padding-left: 2%;
+    padding-right: 2%;
 `;
 const TopContainer = styled.div`
-    width: 100%;
-    height: 250px;
+    width: 150%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 1.8em;
-    padding-bottom: 5em;
+    padding-top: 5%;
+    padding-left: 5%;
+    /* padding-bottom: 5em; */
 `;
 const BackDrop = styled.div`
     width: 150%;
@@ -38,17 +41,16 @@ const BackDrop = styled.div`
     flex-direction: column;
     border-radius: 50%;
     transform: rotate(60deg);
-    top: -290px;
-    left: -70px;
-    background: rgb(8, 150, 48);
-    background: linear-gradient (
-        58deg,
-        rgba(8, 150, 48, 1) 20%rgba,
-        #054d03 100%
-    );
+    top: -385px;
+    left: -60px;
+    background: #677487;
+    
+    @media (max-width: 1024px) {
+        background: black;
+    }
 `;
 const HeaderContainer = styled.div`
-    width: 100%100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 `;
@@ -56,23 +58,37 @@ const HeaderText = styled.div`
     font-size: 30px;
     font-weight: 600;
     line-height: 1.2;
-    color: #fff;
+    color: white;
     z-index: 10;
 `;
-const SmallText = styled.h5`
-    color: #fff;
+const SmallText = styled.p`
+    color: white;
     font-weight: 500;
     font-size: 14px;
     z-index: 10;
     margin: 0;
-    margin-top: 15px;
+    margin-top: 10px;
 `;
 const InnerContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 10px;
 `;
+
+const Row = styled.div`
+    height: 100%;
+
+`
+;
+const Column = styled.div `
+    float: right;
+
+    @media (max-width: 1024px) {
+        float: center;
+    }
+`
+;
 
 const Auth = (props) => {
     const [active, setActive] = useState("login");
@@ -87,7 +103,9 @@ const Auth = (props) => {
 
     let hour = new Date().getHours()
 
-    return ( 
+    return (
+        <Row>
+        <Column span="3">
         <Container>
             <TopContainer>
                 <BackDrop />
@@ -102,9 +120,11 @@ const Auth = (props) => {
                 </HeaderContainer>
             </TopContainer>
             <InnerContainer>
-                {active === 'login' ? <Login switchToSignup={switchToSignup} updateToken={props.updateToken} updateID={props.updateID}/> : <Signup switchToLogin={switchToLogin} updateToken={props.updateToken}/>}
+                {active === 'login' ? <Login switchToSignup={switchToSignup} updateToken={props.updateToken} updateID={props.updateID}/> : <Signup switchToLogin={switchToLogin} updateToken={props.updateToken} updateID={props.updateID}/>}
             </InnerContainer>
         </Container>
+        </Column>
+        </Row>
      );
 }
  

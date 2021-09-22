@@ -90,7 +90,6 @@ const SightingEdit = (props) => {
                     <FormGroup>
                         <Label>Rarity</Label>
                         <Input type="select" name="rarity" placeholder="Rarity" value={editRarity} onChange={(e) => setEditRarity(e.target.value)}>
-                            <option value="" disabled selected>ABA Code Rarity</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
