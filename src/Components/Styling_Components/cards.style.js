@@ -27,3 +27,8 @@ padding-bottom: 1%;
 margin: 5%;
 position: relative;
 `
+
+export const BirdImage = styled.img`
+height: 25%;
+width:25%auto;
+`

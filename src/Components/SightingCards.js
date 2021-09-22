@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import styled from "styled-components";
 import ImageExpander from "./ImageExpander";
-import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/Fonts/cards.style'
+import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/cards.style'
 
 const CardContainer = styled.div`
     display: flex;

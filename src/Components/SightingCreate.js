@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import styled from 'styled-components';
+import { BirdTitle, Information, SubmitButton, CloseButton, AddABird } from './Styling_Components/create.style';
 
 const SightingCreate = (props) => {
     const [bird, setBird] = useState('');
@@ -61,11 +62,12 @@ const SightingCreate = (props) => {
 
     return(
         <div>
-            <Button color="success" onClick={toggle}>Add a Bird</Button>
+            <AddABird onClick={toggle}>Add a Bird</AddABird>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Add A Bird!</ModalHeader>
+                <ModalHeader toggle={toggle}><BirdTitle>Add A Bird!</BirdTitle></ModalHeader>
                 <ModalBody>
             <Form onSubmit={handleSubmit}>
+                <Information>
                 <FormGroup>
                     <Label htmlFor="bird"/>
                     <Input name="bird" value={bird} placeholder="Bird" onChange={(e) => setBird(e.target.value)} />
@@ -102,11 +104,15 @@ const SightingCreate = (props) => {
                         <option value="3">3</option>
                     </Input>
                 </FormGroup>
-                <Button type="submit" onClick={toggle}>Click to Submit</Button>
+                </Information>
+                <SubmitButton onClick={toggle}>Submit!</SubmitButton>
+                {/* <Button type="submit" onClick={toggle}>Click to Submit</Button> */}
+                
             </Form>
             </ModalBody>
             <ModalFooter>
-                <Button onClick={toggle}>Close</Button>
+                <CloseButton onClick={toggle}>Close</CloseButton>
+                {/* <Button onClick={toggle}>Close</Button> */}
             </ModalFooter>
             </Modal>
         </div>
