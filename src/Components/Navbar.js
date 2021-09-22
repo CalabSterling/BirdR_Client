@@ -1,74 +1,89 @@
-import React from 'react';
-import { Navbar, NavbarBrand, NavItem, NavLink, Button } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import SightingCreate from './SightingCreate';
+import WeatherParent from './WeatherParent';
+import { Button, Container, NavbarBrand, NavbarToggler, Collapse, Navbar, Nav, NavItem, NavLink, Row, Col, CardDeck, CardColumns } from 'reactstrap';
 import styled from 'styled-components';
 
-// const Navbar = (props) => {
-//   const Navdiv = styled.div `
-//     background-color: white;
-//     margin-bottom: 0%;
-//     width: 100vw;
-//     z-index: 100;
-//     /* position: fixed; */
-//   ` 
+const Sidebar = styled.div`
+    margin-top: 3%;
+    position: fixed;
+    z-index: 99;
+    padding-left: 2%;
+    /* display: block; */
+    /* margin-bottom: 200px; */
 
-//   return (
-//     <Navdiv>
-//       <Nav className="mr-auto">
-//         <NavItem>
-//           <NavLink href="#" ml-auto>BirdR</NavLink>
-//         </NavItem>
-//         <NavItem>
-//           <NavLink href="#" >Link</NavLink>
-//         </NavItem>
-//         <NavItem>
-//           <Button onClick={props.clickLogout}>Logout</Button>
-//         </NavItem>
-//       </Nav>
-//       </Navdiv>
-//   );
-// }
-
-// export default Navbar;
+    @media (max-width: 540px) {
+        background-color: white;
+    }
+`;
 
 const Sitebar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState({ lat: 0, lon: 0 });
 
-  const toggle = () => setIsOpen(!isOpen);
+    const toggle = () => setIsOpen(!isOpen);
 
-  return ( 
+    useEffect(() => {
+      navigator.geolocation.getCurrentPosition(success => {
+        var lat = success.coords.latitude;
+        var lon = success.coords.longitude;
+        console.log(lon, lat)
+        setPosition({ lat: lat, lon: lon })
+      })
+    }, []);
+
+  return (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
-        </Collapse>
-      </Navbar>
+                 <Sidebar>
+                <Navbar light expand="md" id="Navbar">
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav vertical>
+                    <NavbarBrand href="#sightingIndex" id="birdr">BirdR</NavbarBrand>
+                        <NavItem className="sightingNavItem" id="addABirdNav">
+                            <SightingCreate  token={props.token}/>
+                        </NavItem>
+                        <NavItem className="sightingNavItem">
+                            <NavLink href="https://www.aba.org/aba-checklist/" target='_blank'>Rarity Rating Reference</NavLink>
+                        </NavItem>
+                        <NavItem className="sightingNavItem">
+                            <WeatherParent position={position} />
+                        </NavItem>
+                        <NavItem className="sightingNavItem">
+                            <NavLink href="http://hint.fm/wind/" target="_blank">Wind Conditions</NavLink>
+                        </NavItem>
+                        <NavItem className="sightingNavItem">
+                        <Button onClick={props.updateFeedMine} className="sighting-button">My Sightings</Button>
+                        </NavItem>
+                        <NavItem className="sightingNavItem">
+                        <Button onClick={props.updateFeedGlobal} className="sighting-button">The Birdfeed</Button>
+                        </NavItem >
+                        <NavItem className="sightingNavItem">
+                        <Button onClick={props.clickLogout} className="sighting-button">Logout</Button>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+                </Navbar>
+            </Sidebar>
+
+
+      {/* <Nav>
+        <NavItem>
+          <NavLink href="#">Link</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="#"></NavLink>
+        </NavItem>
+        <NavItem>
+          <Button onClick={props.updateFeedMine}> My Sightings</Button>
+        </NavItem>
+        <NavItem>
+          <Button onClick={props.updateFeedGlobal}> Global Sightings</Button>
+        </NavItem>
+        <NavItem>
+          <Button onClick={props.clickLogout}>Logout</Button>
+        </NavItem>
+      </Nav> */}
     </div>
    );
 }

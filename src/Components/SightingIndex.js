@@ -19,36 +19,12 @@ const IndexDiv = styled.div`
     display: block;
 `;
 
-const Sidebar = styled.div`
-    margin-top: 3%;
-    position: fixed;
-    z-index: 99;
-    /* display: block; */
-
-    @media (max-width: 540px) {
-        background-color: white;
-    }
-`;
-
 
 const SightingIndex = (props) => {
     const [sightings, setSightings] = useState([]);
     const [updateActive, setUpdateActive] = useState(false);
     const [sightingToUpdate, setSightingToUpdate] = useState({});
-    const [position, setPosition] = useState({ lat: 0, lon: 0 });
-    const [isOpen, setIsOpen] = useState(false);
 
-    const toggle = () => setIsOpen(!isOpen);
-
-    
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(success => {
-          var lat = success.coords.latitude;
-          var lon = success.coords.longitude;
-          console.log(lon, lat)
-          setPosition({ lat: lat, lon: lon })
-        })
-      }, []);
 
     const fetchSightings = () => {
         fetch('http://localhost:3000/sighting', {
@@ -83,11 +59,11 @@ const SightingIndex = (props) => {
     return(
         <IndexDiv id="sightingIndex">
         <NewBackground>
-            
+          
         <Container>
         <Row>
             <Col md="4">  
-            <Sidebar>
+            {/* <Sidebar>
                 <Navbar light expand="md" id="Navbar">
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
@@ -106,38 +82,27 @@ const SightingIndex = (props) => {
                             <NavLink href="http://hint.fm/wind/" target="_blank">Wind Conditions</NavLink>
                         </NavItem>
                         <NavItem className="sightingNavItem">
-                        <Button onClick={props.clickLogout} className="sighting-button">Logout</Button>
+                        <Button onClick={props.updateFeedMine} className="sighting-button">My Sightings</Button>
                         </NavItem>
                         <NavItem className="sightingNavItem">
-                        <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-            </NavItem>
+                        <Button onClick={props.updateFeedGlobal} className="sighting-button">The Birdfeed</Button>
+                        </NavItem >
+                        <NavItem className="sightingNavItem">
+                        <Button onClick={props.clickLogout} className="sighting-button">Logout</Button>
+                        </NavItem>
                     </Nav>
                 </Collapse>
                 </Navbar>
-            </Sidebar>
-            </Col>
+            </Sidebar> */}
+            </Col> 
+            
                  <Col md="8">
-                     <SightingCards sightings={sightings} fetchSightings={fetchSightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} token={props.token} />
+                      <SightingCards sightings={sightings} fetchSightings={fetchSightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} token={props.token} updateSightingFeed={props.updateSightingFeed}/> 
                 </Col>
                 {updateActive ? <SightingEdit sightingToUpdate={sightingToUpdate} updateOff={updateOff} token={props.token} fetchSightings={fetchSightings} /> : <></>}
-            </Row>
+        </Row>  
         </Container>
+        
         </NewBackground>
         </IndexDiv>
     )
