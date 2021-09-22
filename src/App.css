@@ -3,6 +3,7 @@
   padding: 5% 18% 8% 10%;
   background-color: blue;
   border: none;
+  /* text-decoration: none; */
   /* margin-bottom: 2%; */
 };
 
@@ -30,23 +31,42 @@
   width: fit-content;
 };
 
+.nav-button {
+  text-decoration: none;
+  color: yellow;
+}
 
-a {
+
+/* a:link {
+  text-decoration: none;
+  color: white; */
+  /* font-size: 14px; */
+/* }; */
+
+a:visited {
   text-decoration: none;
   color: white;
-  font-size: 14px;
-};
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+a:active {
+  text-decoration: none;
+  color: white;
+}
 
 .custom-modal-style {
   width: fit-content;
-  /* justify-content: center; */
-  background: none;
+  background: transparent;
   border: none;
 };
 
-#expanded-image {
-  width: 140%;
-  height: 140%;
+.expanded-image {
+  width: 100px;
+  height: 1%;
 };
 
 #add-a-bird {

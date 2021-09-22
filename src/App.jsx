@@ -8,8 +8,6 @@ import background2 from './Assets/backgroundimage9.jpg';
 import Sitebar from './Components/Navbar';
 
 
-
-
 const BirdBackground = styled.div`
 background-image: url(${background});
 background-color: #719D80;
@@ -90,7 +88,6 @@ function App(props) {
   return (
     <BirdBackground>
     <SiteContainer>
-    {/* {sessionToken === '' ? null : <SightingIndex clickLogout={clearToken}/>} */}
       {localStorage.getItem('token') === sessionToken ? <Sitebar navbarSight={navbarSight} clickLogout={clearToken} updateFeedMine={updateFeedMine} updateFeedGlobal={updateFeedGlobal} />: null }
       <UserContainer>
         {protectedViews()}
