@@ -20,6 +20,7 @@ const SightingCreate = (props) => {
     const [rarity, setRarity] = useState('');
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [private1, setPrivate] = useState(false);
 
     const toggle = () => setModal(!modal);
 
@@ -28,7 +29,7 @@ const SightingCreate = (props) => {
         e.preventDefault();
         fetch(`http://localhost:3000/sighting/sighting`, {
             method: 'POST',
-            body: JSON.stringify({sighting: {bird: bird, location: location, time: time, date: date, description: description, image: image, rarity: rarity}}),
+            body: JSON.stringify({sighting: {bird: bird, location: location, time: time, date: date, description: description, image: image, rarity: rarity, private1: private1}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': props.token
@@ -42,7 +43,8 @@ const SightingCreate = (props) => {
             setDate('');
             setDescription('');
             setImage('');
-            setRarity('')
+            setRarity('');
+            setPrivate('');
             props.fetchSightings();
         });
     };
@@ -111,6 +113,14 @@ const SightingCreate = (props) => {
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                    </Input>
+                </FormGroup>
+                <FormGroup>
+                    <Label htmlFor="private1"/>
+                    <Input type="select" name="private1" placeholder="Privacy" value={private1} onChange={(e) => setPrivate(e.target.value)} >
+                        <option value="" disabled selected>Privacy</option>
+                        <option value="true">Private</option>
+                        <option value="false">Public</option>
                     </Input>
                 </FormGroup>
                 </Information>

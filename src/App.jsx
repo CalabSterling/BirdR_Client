@@ -23,7 +23,7 @@ left: 0;
 @media (max-width: 1024px) {
   background-image: url(${background2});
 }
-`
+`;
 
 const SiteContainer = styled.div`
   font-family: 'Amatic SC', cursive;
@@ -39,7 +39,7 @@ const UserContainer = styled.div`
   @media (max-width: 1024px) {
     margin: auto;
   }
-`
+`;
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');

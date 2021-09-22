@@ -120,7 +120,7 @@ const Auth = (props) => {
                 </HeaderContainer>
             </TopContainer>
             <InnerContainer>
-                {active === 'login' ? <Login switchToSignup={switchToSignup} updateToken={props.updateToken} updateID={props.updateID}/> : <Signup switchToLogin={switchToLogin} updateToken={props.updateToken}/>}
+                {active === 'login' ? <Login switchToSignup={switchToSignup} updateToken={props.updateToken} updateID={props.updateID}/> : <Signup switchToLogin={switchToLogin} updateToken={props.updateToken} updateID={props.updateID}/>}
             </InnerContainer>
         </Container>
         </Column>
