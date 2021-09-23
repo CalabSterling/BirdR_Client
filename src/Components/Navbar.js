@@ -49,10 +49,10 @@ const Sitebar = (props) => {
                 <WeatherParent position={position} />
               </NavItem>
               <NavItem className="sightingNavItem">
-                <Button className="sighting-button"><a href="http://hint.fm/wind/" target="_blank" className="nav-button" style={{ textDecoration: "none" }}>Current Wind</a></Button>
+                <Button className="sighting-button"><a href="http://hint.fm/wind/" target="_blank" className="nav-button" style={{color:"white", textDecoration: "none" }}>Current Wind</a></Button>
               </NavItem >
               <NavItem className="sightingNavItem">
-                <Button className="sighting-button"><a href="https://www.aba.org/aba-checklist/" target="_blank" style={{ textDecoration: "none" }}>Rarity Codes</a></Button>
+                <Button className="sighting-button"><a href="https://www.aba.org/aba-checklist/" target="_blank" style={{color:"white", textDecoration: "none" }}>Rarity Codes</a></Button>
               </NavItem >
               <NavItem className="sightingNavItem">
                 <Button onClick={props.clickLogout} className="sighting-button">Logout</Button>

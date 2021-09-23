@@ -21,6 +21,11 @@ const ButtonContainer = styled.button`
     }
 `;
 
+const InputFont = styled.div`
+font-family: 'Roboto Mono', monospace;
+font-size: large;
+`
+
 const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -49,11 +54,11 @@ const Login = (props) => {
         <Container>
             <Form onSubmit={handleSubmit}>
                     <Label htmlFor="email">Email</Label>
-                    <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username} placeholder="Username" type="email"/>
-                    <br />
+                    <InputFont><Input onChange={(e) => setUsername(e.target.value)} name="username" value={username} placeholder="Username" type="email"/></InputFont>
+                    {/* <br /> */}
                     <Label htmlFor="password">Password</Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="Password" type="password"/>
-                    <br />
+                    <InputFont><Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="Password" type="password"/></InputFont>
+                    {/* <br /> */}
                     <ButtonContainer type="submit">Login</ButtonContainer>
                     <br />
                     <p>Don't have an account? <a href="/signup" onClick={props.switchToSignup}>Signup</a></p>

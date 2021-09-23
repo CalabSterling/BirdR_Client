@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import {Card, CardImg, CardText, CardTitle, CardSubtitle, CardBody, Button, CardDeck} from "reactstrap";
 import styled from "styled-components";
 import ImageExpander from "./ImageExpander";
-<<<<<<< HEAD
-import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/cards.style'
-=======
 import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/cards.style';
->>>>>>> f362b66dc6edf3bb1fa0ccc02ad1e94320084d24
 
 const CardContainer = styled.div`
     display: flex;

@@ -6,11 +6,7 @@ font-family: 'Amatic SC', cursive;
 text-align: center;
 `
 
-<<<<<<< HEAD
-export const Information = styled.p`
-=======
 export const Information = styled.p` 
->>>>>>> f362b66dc6edf3bb1fa0ccc02ad1e94320084d24
 color: #4F5950;
 font-family: 'Roboto Mono', monospace;
 `

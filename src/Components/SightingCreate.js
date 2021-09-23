@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import styled from 'styled-components';
-<<<<<<< HEAD
-import { BirdTitle, Information, SubmitButton, CloseButton, AddABird } from './Styling_Components/create.style';
-=======
 import { BirdTitle, Information, SubmitButton, CloseButton } from './Styling_Components/create.style';
 
 
@@ -12,7 +9,6 @@ const Create = styled.div `
     /* width: 200%; */
 `;
 
->>>>>>> f362b66dc6edf3bb1fa0ccc02ad1e94320084d24
 
 const SightingCreate = (props) => {
     const [bird, setBird] = useState('');
@@ -74,15 +70,9 @@ const SightingCreate = (props) => {
     };
 
     return(
-<<<<<<< HEAD
-        <div>
-            <AddABird onClick={toggle}>Add a Bird</AddABird>
-            <Modal isOpen={modal} toggle={toggle}>
-=======
         <Create>
             <Button onClick={toggle} className="sighting-button">Add a Bird</Button>
             <Modal isOpen={modal} toggle={toggle} id="add-a-bird">
->>>>>>> f362b66dc6edf3bb1fa0ccc02ad1e94320084d24
                 <ModalHeader toggle={toggle}><BirdTitle>Add A Bird!</BirdTitle></ModalHeader>
                 <ModalBody>
             <Form onSubmit={handleSubmit}>
@@ -134,21 +124,11 @@ const SightingCreate = (props) => {
                     </Input>
                 </FormGroup>
                 </Information>
-<<<<<<< HEAD
-                <SubmitButton onClick={toggle}>Submit!</SubmitButton>
-                {/* <Button type="submit" onClick={toggle}>Click to Submit</Button> */}
-                
-=======
                 <SubmitButton type="submit" onClick={toggle}>Click to Submit</SubmitButton>
->>>>>>> f362b66dc6edf3bb1fa0ccc02ad1e94320084d24
             </Form>
             </ModalBody>
             <ModalFooter>
                 <CloseButton onClick={toggle}>Close</CloseButton>
-<<<<<<< HEAD
-                {/* <Button onClick={toggle}>Close</Button> */}
-=======
->>>>>>> f362b66dc6edf3bb1fa0ccc02ad1e94320084d24
             </ModalFooter>
             </Modal>
             </Create>

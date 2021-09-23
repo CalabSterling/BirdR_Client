@@ -27,13 +27,4 @@ export const TheCardDeck = styled.div`
 padding-bottom: 1%;
 margin: 5%;
 position: relative;
-<<<<<<< HEAD:src/Components/Styling_Components/cards.style.js
-`
-
-export const BirdImage = styled.img`
-height: 25%;
-width:25%auto;
-`
-=======
 `;
->>>>>>> f362b66dc6edf3bb1fa0ccc02ad1e94320084d24:src/Components/Styling_Components/Fonts/cards.style.js
