@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const CLOUD_URL = 'https://api.cloudinary.com/v1_1/dmvbiwqqd/image/upload'
+const CLOUD_URL = `https://api.cloudinary.com/v1_1/dmvbiwqqd/image/upload`
 
 const ImageUpload = () => {
 

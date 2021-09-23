@@ -21,6 +21,9 @@ const Navbar = (props) => {
         <NavItem>
           <Button onClick={props.clickLogout}>Logout</Button>
         </NavItem>
+        <NavItem>
+          <Button onClick={props.fetchSightings}>Add a bird</Button>
+        </NavItem>
       </Nav>
     </div>
   );
