@@ -1,44 +1,30 @@
 import React, { useState } from "react";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-  CardDeck
-} from "reactstrap";
+import {Card, CardImg, CardText, CardTitle, CardSubtitle, CardBody, Button, CardDeck} from "reactstrap";
 import styled from "styled-components";
 import ImageExpander from "./ImageExpander";
-import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/Fonts/cards.style'
+import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/cards.style';
 
 const CardContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     padding: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
     text-align: left;
-    
-    
-`
+    font-family: 'Amatic SC', cursive;
+`;
 
 const DisplayCard = styled.section`
 padding-bottom: 10%;
 margin: 5%;
 position: relative;
-`
-
-
-
+`;
 
 const SightingCards = (props) => {
   const [state, setState] = useState(false);
   const [image, setImage] = useState('');
-  const [sightingIndex, setSightingIndex] = useState('');
   const [likeCount, setLikeCount] = useState(0);
   
-    console.log(props.sightings)
+    console.log(props.privacy)
 
   const deleteSighting = (sighting) => {
     fetch(`http://localhost:3000/sighting/${sighting.id}`, {
@@ -67,15 +53,10 @@ const SightingCards = (props) => {
     }).then((res) => {props.fetchSightings()})
     }}
 
-  function hoverHum(e) {
-    Button.style.cursor = 'url("https://downloads.totallyfreecursors.com/cursor_files/hummingbird.cur"), url("https://downloads.totallyfreecursors.com/thumbnails/hummingbird1.gif"), auto;'
-  }
-
-
   
   const sightingMapper = () => {
     return props.sightings.map((sighting, index, array) => {
-
+      console.log(sighting.owner_id)
       function expandImage(event) {
         event.preventDefault();
         setState(!state);
@@ -85,12 +66,13 @@ const SightingCards = (props) => {
       return (
         <div>
         { (sighting.owner_id.toString() === localStorage.getItem('ID') && props.updateSightingFeed === 'mine') ?
+        
         <TheCardDeck>
         <Card>
         
         <CardBody key={[index]}>
           <Title>{sighting.bird}</Title>
-          <Loc>@{sighting.location}</Loc>
+          <Loc>@ {sighting.location}</Loc>
           <CardImg
           top
           width="100%"
@@ -112,7 +94,7 @@ const SightingCards = (props) => {
       </Card>
       </TheCardDeck> : 
 
-        (props.updateSightingFeed === 'global') ? 
+        (props.updateSightingFeed === 'global' && sighting.private1 === "false") ? 
 
         <TheCardDeck>
         <Card>

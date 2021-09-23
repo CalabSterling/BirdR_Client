@@ -13,9 +13,18 @@ const ButtonContainer = styled.button`
     color: #fff;
     font-size: 22px;
     border: none;
-    background-color: rgb(8,150,48);
+    background-color: #677487;
     border-radius: 4px;
+
+    @media (max-width: 1024px) {
+        background-color: black;
+    }
 `;
+
+const MemberP = styled.p`
+    padding-top: 5%;
+`
+;
 
 const Signup = (props) => {
     const [username, setUsername] = useState('');
@@ -36,6 +45,7 @@ const Signup = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.sessionToken)
+            props.updateID(data.ID)
             console.log(data.sessionToken)
         })
     }
@@ -60,7 +70,7 @@ const Signup = (props) => {
             <br />
             <ButtonContainer type="submit" >Signup</ButtonContainer>
             <br />
-            <p>Already a member?<a href="/login" onClick={props.switchToLogin}>Login</a></p>
+            <MemberP>Already a member? <a href="/login" onClick={props.switchToLogin}>Login</a></MemberP>
         </Form>
         </Container>
      );

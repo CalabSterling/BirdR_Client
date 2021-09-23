@@ -1,6 +1,11 @@
 import React, { useState} from "react";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import styled from "styled-components";
 
+const ImageSize = styled.img `
+    width: 150%;
+    height: 150%;
+`;
 
 const ImageExpander = (props) => {
     const [modal, setModal] = useState(true);
@@ -8,13 +13,15 @@ const ImageExpander = (props) => {
     const toggle = () => setModal(!modal)
 
     return ( 
-        <Modal isOpen={modal} toggle={toggle} >
+        <Modal isOpen={modal} toggle={toggle} contentClassName='custom-modal-style' style={{background: "transparent"}}>
             <ModalHeader toggle={toggle} ></ModalHeader>
             <ModalBody>
-                <img src={props.image}/>
+                {/* <ImageSize> */}
+                <ImageSize src={props.image} className="expanded-image" />
+                {/* </ImageSize> */}
             </ModalBody>
         </Modal>
      );
-}
+};
  
 export default ImageExpander;

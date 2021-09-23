@@ -1,24 +1,28 @@
-// import './App.css';
+import './App.css';
 import React, {useState, useEffect} from 'react';
-import Sitebar from './Components/Navbar';
 import Auth from './auth/Auth';
 import SightingIndex from './Components/SightingIndex';
 import styled from 'styled-components';
-import background from './Assets/backgroundimage4.jpg'
+import background from './Assets/backgroundimage1.jpg';
+import background2 from './Assets/backgroundimage9.jpg';
+import Sitebar from './Components/Navbar';
 
 
 const BirdBackground = styled.div`
 background-image: url(${background});
-background-color: #719D80;
 background-size: cover;
+background-position-y: 10%;
 min-height: 100%;
-min-width: 1024px;
 width: 100%;
 height: 100%;
 position: absolute;
 top: 0;
 left: 0;
-`
+
+@media (max-width: 1024px) {
+  background-image: url(${background2});
+}
+`;
 
 const SiteContainer = styled.div`
   font-family: 'Amatic SC', cursive;
@@ -28,20 +32,27 @@ const SiteContainer = styled.div`
 
 
 const UserContainer = styled.div`
-margin: auto;
-`
+  padding-top: 0%;
+  padding-right: 1%;
 
+  @media (max-width: 1024px) {
+    margin: auto;
+  }
+`;
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
   const [ID, setID] = useState('');
-  const [updateSightingFeed, setUpdateSightingFeed] = useState('global');
+  const [updateSightingFeed, setUpdateSightingFeed] = useState('potato');
+  const [navbarSight, setNavbarSight] = useState('');
 
   useEffect(() => {
     if (localStorage.getItem('token')){
       setSessionToken(localStorage.getItem('token'));
     }
-  }, [])
+  }, []);
+
+ 
 
   const updateToken = (newToken) => {
     localStorage.setItem('token', newToken);
@@ -70,19 +81,19 @@ function App(props) {
   }
 
   const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') ? <SightingIndex token={sessionToken} updateSightingFeed={updateSightingFeed}/> : <Auth updateToken={updateToken} updateID={updateID} />)
+    return (sessionToken === localStorage.getItem('token') ? <SightingIndex navbarSight={setNavbarSight} token={sessionToken} updateSightingFeed={updateSightingFeed}/> : <Auth updateToken={updateToken} updateID={updateID} />)
   };
 
   return (
     <BirdBackground>
     <SiteContainer>
-      {localStorage.getItem('token') === sessionToken ? <Sitebar clickLogout={clearToken} updateFeedMine={updateFeedMine} updateFeedGlobal={updateFeedGlobal} />: null }
+      {localStorage.getItem('token') === sessionToken ? <Sitebar navbarSight={navbarSight} clickLogout={clearToken} updateFeedMine={updateFeedMine} updateFeedGlobal={updateFeedGlobal} />: null }
       <UserContainer>
         {protectedViews()}
       </UserContainer>
     </SiteContainer>
     </BirdBackground>
   );
-}
+};
 
 export default App;

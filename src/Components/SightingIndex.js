@@ -3,12 +3,37 @@ import { Container, Row, Col } from 'reactstrap';
 import SightingCreate from './SightingCreate';
 import SightingCards from './SightingCards';
 import SightingEdit from './SightingEdit';
+import styled from 'styled-components';
+
+const NewBackground = styled.body`
+    background-color: #d3d5c0;
+    height: 100%;
+    width: 100vw;
+    /* margin-top: -150px; */
+    /* padding-top: 300px; */
+`;
+
+const IndexDiv = styled.div`
+    margin-top: 0%;
+    padding-top: 0%;
+    display: block;
+`;
+
+const AddABird = styled.div `
+    position: fixed;
+    padding-top: 2%;
+    padding-left: 75%;
+    width: 100%;
+    z-index: 98;
+`
 
 
 const SightingIndex = (props) => {
     const [sightings, setSightings] = useState([]);
     const [updateActive, setUpdateActive] = useState(false);
-    const [sightingToUpdate, setSightingToUpdate] = useState({}); 
+    const [sightingToUpdate, setSightingToUpdate] = useState({});
+    
+
 
     const fetchSightings = () => {
         fetch(`http://localhost:3000/sighting`, {
@@ -20,6 +45,7 @@ const SightingIndex = (props) => {
         }).then( (res) => res.json())
         .then((sightingData) => {
             setSightings(sightingData)
+            props.navbarSight(sightingData)
         })
     }
 
@@ -41,17 +67,24 @@ const SightingIndex = (props) => {
     }, [])
 
     return(
+        <IndexDiv id="sightingIndex">
+        <NewBackground> 
         <Container>
-            <Row>
-                <Col md="3">
-                     <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
-                 </Col> 
+        <Row>
+            <Col md="3">
+            <AddABird>  
+            <SightingCreate fetchSightings={fetchSightings} token={props.token}/>
+            </AddABird>
+            </Col>
                  <Col md="9">
-                      <SightingCards sightings={sightings} fetchSightings={fetchSightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} token={props.token} updateSightingFeed={props.updateSightingFeed}/> 
+                      <SightingCards sightings={sightings} fetchSightings={fetchSightings} editUpdateSighting={editUpdateSighting} updateOn={updateOn} token={props.token} updateSightingFeed={props.updateSightingFeed} /> 
                 </Col>
                 {updateActive ? <SightingEdit sightingToUpdate={sightingToUpdate} updateOff={updateOff} token={props.token} fetchSightings={fetchSightings} /> : <></>}
-            </Row>
+        </Row>  
         </Container>
+        
+        </NewBackground>
+        </IndexDiv>
     )
 }
 
