@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import styled from 'styled-components';
 import { BirdTitle, Information, SubmitButton, CloseButton } from './Styling_Components/create.style';
-
+import APIURL from '../helpers/environment';
 
 const Create = styled.div `
     font-family: 'Amatic SC', cursive;
@@ -27,7 +27,7 @@ const SightingCreate = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/sighting/sighting`, {
+        fetch(`${APIURL}/sighting/sighting`, {
             method: 'POST',
             body: JSON.stringify({sighting: {bird: bird, location: location, time: time, date: date, description: description, image: image, rarity: rarity, private1: private1}}),
             headers: new Headers({

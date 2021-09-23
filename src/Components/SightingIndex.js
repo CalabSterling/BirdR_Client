@@ -4,6 +4,7 @@ import SightingCreate from './SightingCreate';
 import SightingCards from './SightingCards';
 import SightingEdit from './SightingEdit';
 import styled from 'styled-components';
+import APIURL from '../helpers/environment';
 
 const NewBackground = styled.body`
     background-color: #d3d5c0;
@@ -36,7 +37,7 @@ const SightingIndex = (props) => {
 
 
     const fetchSightings = () => {
-        fetch(`http://localhost:3000/sighting`, {
+        fetch(`${APIURL}/sighting`, {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',

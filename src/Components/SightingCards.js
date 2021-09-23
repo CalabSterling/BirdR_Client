@@ -3,6 +3,7 @@ import {Card, CardImg, CardText, CardTitle, CardSubtitle, CardBody, Button, Card
 import styled from "styled-components";
 import ImageExpander from "./ImageExpander";
 import {Title, Loc, TimDat, Description, RarityRating, TheCardDeck} from './Styling_Components/cards.style';
+import APIURL from "../helpers/environment";
 
 const CardContainer = styled.div`
     display: flex;
@@ -27,7 +28,7 @@ const SightingCards = (props) => {
     console.log(props.privacy)
 
   const deleteSighting = (sighting) => {
-    fetch(`http://localhost:3000/sighting/${sighting.id}`, {
+    fetch(`${APIURL}/sighting/${sighting.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -41,7 +42,7 @@ const SightingCards = (props) => {
     if(sighting === undefined) {
         console.log("nothing here")
     } else {
-        fetch(`http://localhost:3000/sighting/updateLikes/${sighting.id}`, {
+        fetch(`${APIURL}/sighting/updateLikes/${sighting.id}`, {
       method: `PUT`,
       body: JSON.stringify({
         sighting: {

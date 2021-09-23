@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Form, FormGroup, Input, Modal, ModalHeader, ModalBody, Label} from 'reactstrap';
+import APIURL from '../helpers/environment';
 
 const SightingEdit = (props) => {
     const [editBird, setEditBird] = useState(props.sightingToUpdate.bird);
@@ -14,7 +15,7 @@ const SightingEdit = (props) => {
     const sightingUpdate = (event, sighting) => {
         event.preventDefault();
         console.log(props);
-        fetch(`http://localhost:3000/sighting/update/${props.sightingToUpdate.id}`, {
+        fetch(`${APIURL}/sighting/update/${props.sightingToUpdate.id}`, {
             method: `PUT`,
             body: JSON.stringify({
                 sighting: {
