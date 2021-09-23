@@ -112,7 +112,7 @@ const Auth = (props) => {
                 <HeaderContainer>
                     <HeaderText>
                         <LogoContainer>BirdR</LogoContainer>
-                        {hour >= 4 && hour < 12 ? "Good Morning" : hour >= 12 && hour < 18 ? "Good Afternoon" : "Good Evening"}
+                        {hour >= 4 && hour < 12 ? "Good Morning" : hour >= 12 && hour < 18 ? "Good Afternoon" : "Good Evening"}!
                     </HeaderText> 
                     <SmallText>
                         {active === "login" ? 'Please Login' : 'Please Signup' }
